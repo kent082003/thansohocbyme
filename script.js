@@ -1,24 +1,18 @@
-// IMPORT
-import { auth, db } from './firebase.js';
-import { 
-    signInWithEmailAndPassword, 
-    signOut 
-} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { 
-    doc, getDoc, setDoc, collection, getDocs 
-} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { auth, db } from "./firebase.js";
+import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 // LOGIN
 window.login = async function () {
-    const email = document.getElementById("email").value;
-    const pw = document.getElementById("password").value;
+    const email = email.value;
+    const pw = password.value;
 
     try {
         await signInWithEmailAndPassword(auth, email, pw);
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("editorBox").style.display = "block";
-    } catch (e) {
-        alert(e.message);
+        loginBox.style.display = "none";
+        editorBox.style.display = "block";
+    } catch (err) {
+        alert(err.message);
     }
 };
 
@@ -27,22 +21,28 @@ window.logout = function () {
     signOut(auth).then(() => location.reload());
 };
 
-// LOAD MEANING
+// LOAD
 window.loadMeaning = async function () {
-    const num = document.getElementById("numberInput").value;
-    const docRef = doc(db, "meanings", num);
-    const snap = await getDoc(docRef);
+    const type = typeSelect.value;
+    const num = numberInput.value;
 
-    document.getElementById("meaningText").value = snap.exists() 
-        ? snap.data().text 
-        : "";
+    if (!num) return alert("Bạn phải nhập số!");
+
+    const ref = doc(db, "numerology", `${type}_${num}`);
+    const snap = await getDoc(ref);
+
+    meaningText.value = snap.exists() ? snap.data().text : "";
 };
 
-// SAVE MEANING
+// SAVE
 window.saveMeaning = async function () {
-    const num = document.getElementById("numberInput").value;
-    const text = document.getElementById("meaningText").value;
+    const type = typeSelect.value;
+    const num = numberInput.value;
+    const text = meaningText.value;
 
-    await setDoc(doc(db, "meanings", num), { text });
-    document.getElementById("status").innerText = "Đã lưu!";
+    if (!num) return alert("Bạn phải nhập số!");
+
+    await setDoc(doc(db, "numerology", `${type}_${num}`), { text });
+
+    status.innerText = "Đã lưu!";
 };
