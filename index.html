@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Thần Số Học</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Bảng Thần Số Học</h1>
+
+<div id="pdf-content">
+
+<table class="num-table">
+  <tr>
+    <td><span id="n6" class="num"></span><br>Đường đời</td>
+    <td><span id="n22" class="num"></span><br>Sứ mệnh</td>
+    <td><span id="n2" class="num"></span><br>Kết nối đường đời</td>
+  </tr>
+
+  <tr>
+    <td><span id="n8" class="num"></span><br>Tính cách</td>
+    <td><span id="n5" class="num"></span><br>Linh hồn</td>
+    <td><span id="n3" class="num"></span><br>Kết nối LH–NC</td>
+  </tr>
+
+  <!-- Bạn có thể thêm các ô khác -->
+</table>
+
+<h2>Ý nghĩa</h2>
+<div id="meanings"></div>
+
+</div>
+
+<button onclick="downloadPDF()">Xuất PDF</button>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
+<!-- html2pdf -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script src="firebase.js"></script>
+<script src="script.js"></script>
+<script src="pdf.js"></script>
+
+</body>
+</html>

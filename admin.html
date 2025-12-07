@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin - Numerology CMS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-page">
+<div class="admin-box">
+
+<h1>Quản lý ý nghĩa các con số</h1>
+
+<!-- LOGIN -->
+<div id="loginBox">
+    <input id="email" placeholder="Email admin">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- EDITOR -->
+<div id="editorBox" style="display:none;">
+    <div class="row">
+        <input id="numberInput" placeholder="Nhập số VD: 6">
+        <button onclick="loadMeaning()">Load</button>
+    </div>
+
+    <textarea id="meaningText" placeholder="Nhập ý nghĩa con số..."></textarea>
+
+    <div class="row">
+        <button onclick="saveMeaning()">Save</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <p id="status"></p>
+</div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+<script src="firebase.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
