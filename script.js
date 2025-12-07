@@ -1,9 +1,14 @@
+// script.js
+import { auth, db } from './firebase.js'; // Import auth & db from firebase.js
+import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { doc, getDoc, setDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
 // LOGIN
 function login() {
-    let email = document.getElementById("email").value;
-    let pw = document.getElementById("password").value;
+    const email = document.getElementById("email").value;
+    const pw = document.getElementById("password").value;
 
-    auth.signInWithEmailAndPassword(email, pw)
+    signInWithEmailAndPassword(auth, email, pw)
         .then(() => {
             document.getElementById("loginBox").style.display = "none";
             document.getElementById("editorBox").style.display = "block";
@@ -11,37 +16,35 @@ function login() {
         .catch(e => alert(e.message));
 }
 
+// LOGOUT
 function logout() {
-    auth.signOut().then(() => location.reload());
+    signOut(auth).then(() => location.reload());
 }
 
 // LOAD MEANING
-function loadMeaning() {
-    let num = numberInput.value;
-
-    db.collection("meanings").doc(num).get().then(doc => {
-        meaningText.value = doc.exists ? doc.data().text : "";
-    });
+async function loadMeaning() {
+    const num = document.getElementById("numberInput").value;
+    const docRef = doc(db, "meanings", num);
+    const docSnap = await getDoc(docRef);
+    document.getElementById("meaningText").value = docSnap.exists() ? docSnap.data().text : "";
 }
 
-// SAVE
-function saveMeaning() {
-    let num = numberInput.value;
-    let text = meaningText.value;
+// SAVE MEANING
+async function saveMeaning() {
+    const num = document.getElementById("numberInput").value;
+    const text = document.getElementById("meaningText").value;
 
-    db.collection("meanings").doc(num).set({ text })
-        .then(() => status.innerText = "Đã lưu!")
-        .catch(e => alert(e));
+    await setDoc(doc(db, "meanings", num), { text });
+    document.getElementById("status").innerText = "Đã lưu!";
 }
 
-// USER PAGE LOAD ALL
+// LOAD ALL FOR USER PAGE
 if (document.getElementById("meanings")) {
-    db.collection("meanings").get().then(snap => {
-        snap.forEach(doc => {
-            document.getElementById("meanings").innerHTML += `
-                <h3>Số ${doc.id}</h3>
-                <p>${doc.data().text}</p><hr>
-            `;
-        });
+    const querySnapshot = await getDocs(collection(db, "meanings"));
+    querySnapshot.forEach(docSnap => {
+        document.getElementById("meanings").innerHTML += `
+            <h3>Số ${docSnap.id}</h3>
+            <p>${docSnap.data().text}</p><hr>
+        `;
     });
 }
