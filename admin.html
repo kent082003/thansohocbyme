@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Admin - Numerology CMS</title>
 <link rel="stylesheet" href="style.css">
+<script type="module" src="firebase.js"></script>
+<script type="module" src="script.js"></script>
 </head>
+
 <body class="admin-page">
 <div class="admin-box">
+
 <h1>Quản lý ý nghĩa các con số</h1>
 
 <!-- LOGIN -->
 <div id="loginBox">
     <input id="email" placeholder="Email admin">
     <input id="password" type="password" placeholder="Password">
-    <button id="loginBtn">Login</button>
+    <button onclick="login()">Login</button>
 </div>
 
 <!-- EDITOR -->
 <div id="editorBox" style="display:none;">
     <div class="row">
         <input id="numberInput" placeholder="Nhập số VD: 6">
-        <button id="loadBtn">Load</button>
+        <button onclick="loadMeaning()">Load</button>
     </div>
 
     <textarea id="meaningText" placeholder="Nhập ý nghĩa con số..."></textarea>
 
     <div class="row">
-        <button id="saveBtn">Save</button>
-        <button id="logoutBtn">Logout</button>
+        <button onclick="saveMeaning()">Save</button>
+        <button onclick="logout()">Logout</button>
     </div>
 
     <p id="status"></p>
 </div>
-
-<!-- Firebase v9 modules -->
-<script type="module" src="firebase.js"></script>
-<script type="module" src="script.js"></script>
 
 </div>
 </body>
