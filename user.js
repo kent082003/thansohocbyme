@@ -577,12 +577,7 @@ function calculateChallengeNumbers(day, month, year) {
   return { challenge1, challenge2, challenge3, challenge4 };
 }
 
-function reduceToSingleDigit(number) {
-  while (number >= 10) {
-    number = number.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
-  }
-  return number;
-}
+
 let currentTooltip = null;
 
 function toggleTooltip(elementId, spanElement) {
