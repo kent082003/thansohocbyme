@@ -13,7 +13,7 @@ async function loadMeaning(type, number) {
 // -----------------------
 // Hàm reduce chung
 // -----------------------
-function reduceToSingleDigit(num) {
+function reduceToSingleDigitGeneral(num) {
   while (num > 9 && num !== 11 && num !== 22 && num !== 33) {
     num = num.toString().split('').map(Number).reduce((a,b)=>a+b,0);
   }
@@ -490,12 +490,15 @@ function calculateLifeStages(day, month, year) {
   return { stage1, stage2, stage3, stage4 };
 }
 function reduceToSingleDigit(number) {
-  let sum = number;
-  while (sum > 9) {
-    sum = sum.toString().split('').map(Number).reduce((acc, num) => acc + num, 0);
+ while (num > 9 && num !== 11 && num !== 22 && num !== 33) {
+    num = num.toString().split('').map(Number).reduce((a,b)=>a+b,0);
   }
-  return sum;
+  return num;
+  
+  
 }
+
+
 function calculatePersonalYear(day, month, year) {
   // Reduce day, month, and year to single digits (except for master numbers 11, 22, 33)
   const reducedDay = reduceToSingleDigit(day);
