@@ -489,7 +489,7 @@ function calculateLifeStages(day, month, year) {
   // Return the results
   return { stage1, stage2, stage3, stage4 };
 }
-function reduceToSingleDigit(number) {
+function reduceToSingleDigit(num) {
  while (num > 9 && num !== 11 && num !== 22 && num !== 33) {
     num = num.toString().split('').map(Number).reduce((a,b)=>a+b,0);
   }
