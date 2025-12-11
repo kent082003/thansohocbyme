@@ -3,18 +3,21 @@ import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/fir
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 // LOGIN
+
 window.login = async function () {
-    const email = email.value;
-    const pw = password.value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
     try {
-        await signInWithEmailAndPassword(auth, email, pw);
-        loginBox.style.display = "none";
-        editorBox.style.display = "block";
-    } catch (err) {
-        alert(err.message);
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Đăng nhập thành công!");
+        window.location.href = "admin.html";
+    } catch (error) {
+        alert("Sai email hoặc mật khẩu: " + error.message);
     }
 };
+
+
 
 // LOGOUT
 window.logout = function () {
