@@ -641,10 +641,10 @@ function checkForKarmicDebtNumbers(day, month, year, name) {
     // Map số nghiệp sang dạng "13/4", "16/7"…
     const karmicDebtResults = foundKarmicDebtNumbers.map(num => {
       switch(num) {
-        case 14: return "14/5";
-        case 16: return "16/7";
-        case 19: return "19/1";
-        case 13: return "13/4";
+        case 14: return "14_5";
+        case 16: return "16_7";
+        case 19: return "19_1";
+        case 13: return "13_4";
         default: return num;
       }
     });
