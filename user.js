@@ -626,41 +626,33 @@ function toggleTooltip(elementId, spanElement) {
 function checkForKarmicDebtNumbers(day, month, year, name) {
   const karmicDebtNumbers = [13, 14, 16, 19];
 
-  // Calculate the numbers
-  const lifePathNoSum = calculateLifePathNumberNoSum(day, month, year);  // Updated to take day, month, and year
+  const lifePathNoSum = calculateLifePathNumberNoSum(day, month, year);
   const expressionNumberNoSum = calculateExpressionNumberByWordNoSum(name);
   const personalityNumberNoSum = calculatePersonalityNumberNoSum(name);
   const soulUrgeNumberNoSum = calculateSoulUrgeNumberNoSum(name);
 
-  // Combine all numbers into an array
   const allNumbers = [lifePathNoSum, expressionNumberNoSum, personalityNumberNoSum, soulUrgeNumberNoSum];
 
-  // Check if any of the numbers match karmic debt numbers
   const foundKarmicDebtNumbers = allNumbers.filter(num => karmicDebtNumbers.includes(num));
 
   if (foundKarmicDebtNumbers.length > 0) {
     console.log(`Karmic debt numbers found: ${foundKarmicDebtNumbers.join(', ')}`);
 
-    // Create an array of karmic debt numbers with their corresponding values
+    // Map số nghiệp sang dạng "13/4", "16/7"…
     const karmicDebtResults = foundKarmicDebtNumbers.map(num => {
       switch(num) {
-        case 14:
-          return "14/5";
-        case 16:
-          return "16/7";
-        case 19:
-          return "19/1";
-        case 13:
-          return "13/4";
-        default:
-          return num; // Return the number itself if no match is found
+        case 14: return "14/5";
+        case 16: return "16/7";
+        case 19: return "19/1";
+        case 13: return "13/4";
+        default: return num;
       }
     });
 
     return karmicDebtResults;
   } else {
     console.log("No karmic debt numbers found.");
-    return ["..."];
+    return []; // ✅ Trả về array rỗng thay vì ["..."]
   }
 }
 
@@ -770,25 +762,6 @@ function Congcuphuongtien(day, month, year, name) {
 document.addEventListener("DOMContentLoaded", () => {
    
 window.generateResults = async function () {
-	
-
-    const el = document.getElementById("name");
-    console.log("Element:", el);
-
-    if (!el) {
-        alert("ERROR: Không tìm thấy input id='name' trong HTML!");
-        return;
-    }
-
-    const name1 = el.value;
-    console.log("Name value:", name1);
-
-    if (!name1.trim()) {
-        alert("ERROR: Input name tồn tại nhưng giá trị trống!");
-        return;
-    }
-
-    alert("Tên lấy được: " + name1);
 
 
     const name = document.getElementById("name").value;
@@ -863,7 +836,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
  vatchat :  await loadMeaningSafe("vat_chat", vatchat),
  tools : await loadMeaningSafe("cong_cu_phuong_tien", tools),
  
-     //   debt: await loadMeaning("no_nghiep", debt),
+        debt: await loadMeaningSafe("no_nghiep", debt),
         missingNumbers: await loadMeaning("so_thieu", missingNumbers),
         intellectual: await loadMeaning("tu_duy_ly_tri", intellectual),
         subconscious: await loadMeaning("suc_manh_tiem_thuc", subconscious),
@@ -873,7 +846,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
     // --- Hiển thị kết quả ---
 	   //   
  
-	 // <h3>⚖️ Nợ Nghiệp: ${debt}</h3><p>${meanings.debt}</p>
+	 // 
     const resultBox = document.getElementById("resultBox");
     resultBox.style.display = "block";
     resultBox.innerHTML = `
@@ -894,6 +867,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
   <h3>💎 Phi Vật Chất: ${Phivatchat}</h3><p>${meanings.Phivatchat}</p>
               <h3>🏠 Vật Chất: ${vatchat}</h3><p>${meanings.vatchat}</p>
         <h3>🛠️ Công cụ phương tiện: ${tools}</h3><p>${meanings.tools}</p>
+		<h3>⚖️ Nợ Nghiệp: ${debt}</h3><p>${meanings.debt}</p>
         <h3>❌ Số thiếu: ${missingNumbers}</h3><p>${meanings.missingNumbers}</p>
         <h3>🧠 Tư duy lý trí: ${intellectual}</h3><p>${meanings.intellectual}</p>
         <h3>💭 Sức mạnh tiềm thức: ${subconscious}</h3><p>${meanings.subconscious}</p>
