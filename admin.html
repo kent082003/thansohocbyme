@@ -54,17 +54,31 @@ onAuthStateChanged(auth, (user) => {
     <div id="editorBox" style="display:none;">
 
         <h3>Loại chỉ số</h3>
-        <select id="typeSelect">
-            <option value="duong_doi">Đường Đời</option>
-            <option value="su_menh">Sứ Mệnh</option>
-            <option value="linh_hon">Linh Hồn</option>
-            <option value="nhan_cach">Nhân Cách</option>
-            <option value="truong_thanh">Trưởng Thành</option>
-            <option value="ket_noi">Kết Nối</option>
-            <option value="cham">Chặng</option>
-            <option value="thach_thuc">Thách Thức</option>
-            <option value="thieu">Thiếu</option>
-        </select>
+       <select id="typeSelect">
+    <option value="duong_doi">Đường Đời</option>
+    <option value="su_menh">Sứ Mệnh</option>
+    <option value="ket_noi_duongdoi_sumenh">Kết Nối Đường Đời & Sứ Mệnh</option>
+    <option value="nhan_cach">Tính Cách</option>
+    <option value="linh_hon">Linh Hồn</option>
+    <option value="ket_noi_linhhon_nhancach">Kết Nối Linh Hồn - Nhân Cách</option>
+    <option value="truong_thanh">Trưởng Thành</option>
+    <option value="can_bang">Cân Bằng</option>
+    <option value="ngay_sinh">Ngày Sinh</option>
+    <option value="so_thieu">Số Thiếu</option>
+    <option value="tu_duy_ly_tri">Tư Duy Lý Trí</option>
+    <option value="suc_manh_tiem_thuc">Sức Mạnh Tiềm Thức</option>
+    <option value="dam_me">Đam Mê</option>
+    <option value="chặng">Chặng</option>
+    <option value="thach_thuc">Thách Thức</option>
+    <option value="nam">Năm</option>
+    <option value="thang">Tháng</option>
+    <option value="ngay">Ngày</option>
+    <option value="phi_vat_chat">Phi Vật Chất</option>
+    <option value="vat_chat">Vật Chất</option>
+    <option value="cong_cu_phuong_tien">Công cụ phương tiện</option>
+    <option value="no_nghiep">Nợ Nghiệp</option>
+</select>
+
 
         <input id="numberInput" placeholder="Nhập số (VD: 1, 2, 3...)">
         <button onclick="loadMeaning()">Load</button>
