@@ -780,7 +780,7 @@ window.generateResults = async function () {
     const soulUrge = calculateSoulUrgeNumber(name);
     const personality = calculatePersonalityNumber(name);
     const maturity = calculateMaturityNumber(lifePath, expression);
-    const connection = calculateConnectionNumber(lifePath, expression);
+    const connection = calculateConnectionNumber(soulUrge, personality);
     const birthday = calculateBirthDayNumber(day);
     const balance = calculateBalanceNumber(name);
     const passion = calculatePassionNumbers(name);
@@ -789,6 +789,7 @@ window.generateResults = async function () {
     const monthNumber = calculatePersonalMonth(month);
     const dayNumber = calculatePersonalDay(day);
    const Phivatchat = Phivatchat_v1(day, month, year,name);
+   const conneclifeandexpression = calculateConnectionNumber(lifePath,expression);
  
 
 
@@ -837,6 +838,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
  tools : await loadMeaningSafe("cong_cu_phuong_tien", tools),
  
         debt: await loadMeaningSafe("no_nghiep", debt),
+		  conneclifeandexpression: await loadMeaningSafe("ket_noi_duong_doi_su_menh", conneclifeandexpression),
         missingNumbers: await loadMeaning("so_thieu", missingNumbers),
         intellectual: await loadMeaning("tu_duy_ly_tri", intellectual),
         subconscious: await loadMeaning("suc_manh_tiem_thuc", subconscious),
@@ -852,10 +854,11 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
     resultBox.innerHTML = `
         <h3>🔢 Đường đời: ${lifePath}</h3><p>${meanings.lifePath}</p>
         <h3>🎯 Sứ mệnh: ${expression}</h3><p>${meanings.expression}</p>
+		 <h3>🔗 Kết nối Đường đời- Sứ mệnh: ${conneclifeandexpression}</h3><p>${meanings.conneclifeandexpression}</p>
         <h3>💖 Linh hồn: ${soulUrge}</h3><p>${meanings.soulUrge}</p>
-        <h3>😎 Nhân cách: ${personality}</h3><p>${meanings.personality}</p>
-        <h3>🌟 Trưởng thành: ${maturity}</h3><p>${meanings.maturity}</p>
-        <h3>🔗 Kết nối: ${connection}</h3><p>${meanings.connection}</p>
+        <h3>😎 Nhân cách: ${personality}</h3><p>${meanings.personality}</p>       
+  <h3>🔗 Kết nối Linh Hồn - Nhân Cách: ${soulPersonalityConnection}</h3><p>${meanings.soulPersonalityConnection}</p>
+		 <h3>🌟 Trưởng thành: ${maturity}</h3><p>${meanings.maturity}</p>
         <h3>📅 Ngày sinh: ${birthday}</h3><p>${meanings.birthday}</p>
         <h3>⚖️ Số cân bằng: ${balance}</h3><p>${meanings.balance}</p>
         <h3>🔥 Đam mê: ${passion}</h3><p>${meanings.passion}</p>
@@ -871,7 +874,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         <h3>❌ Số thiếu: ${missingNumbers}</h3><p>${meanings.missingNumbers}</p>
         <h3>🧠 Tư duy lý trí: ${intellectual}</h3><p>${meanings.intellectual}</p>
         <h3>💭 Sức mạnh tiềm thức: ${subconscious}</h3><p>${meanings.subconscious}</p>
-        <h3>🔗 Kết nối Linh Hồn - Nhân Cách: ${soulPersonalityConnection}</h3><p>${meanings.soulPersonalityConnection}</p>
+      
     `;
 };
 
