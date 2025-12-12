@@ -17,19 +17,20 @@ p { margin: 0 0 15px; }
 <h1>Nhập thông tin cá nhân</h1>
 
 <div>
-    <input id="name" placeholder="Họ và tên">
+    <input id="name" type="text" placeholder="Họ và tên">
     <input id="day" type="number" placeholder="Ngày sinh" min="1" max="31">
     <input id="month" type="number" placeholder="Tháng sinh" min="1" max="12">
     <input id="year" type="number" placeholder="Năm sinh">
 </div>
 
 <button onclick="generateResults()">Tính các con số</button>
+<!-- Firebase v9 modular -->
+<script type="module" src="user.js"></script>
+<script type="module" src="firebase.js"></script>
 
 <div id="resultBox"></div>
 
-<!-- Firebase v9 modular -->
-<script type="module" src="firebase.js"></script>
-<script type="module" src="user.js"></script>
+
 
 </body>
 </html>
