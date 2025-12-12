@@ -834,7 +834,7 @@ window.generateResults = async function () {
     const yearNumber = calculatePersonalYear(day, month, year);
     const monthNumber = calculatePersonalMonth(month);
     const dayNumber = calculatePersonalDay(day);
-   const Phivatchat = Phivatchat(day, month, year,name);
+   const Phivatchat = Phivatchat_v1(day, month, year,name);
  
 
 
