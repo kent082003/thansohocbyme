@@ -750,15 +750,15 @@ window.generateResults = async function () {
         return;
     }
 
-    const name = el.value;
-    console.log("Name value:", name);
+    const name1 = el.value;
+    console.log("Name value:", name1);
 
-    if (!name.trim()) {
+    if (!name1.trim()) {
         alert("ERROR: Input name tồn tại nhưng giá trị trống!");
         return;
     }
 
-    alert("Tên lấy được: " + name);
+    alert("Tên lấy được: " + name1);
 
 
     const name = document.getElementById("name").value;
