@@ -728,6 +728,9 @@ function Congcuphuongtien(day, month, year, name) {
 // -----------------------
 // Hàm hiển thị kết quả
 // -----------------------
+// -----------------------
+// Hàm hiển thị kết quả
+// -----------------------
 window.generateResults = async function () {
     const name = document.getElementById("name").value;
     const day = parseInt(document.getElementById("day").value);
@@ -748,6 +751,20 @@ window.generateResults = async function () {
     const connection = calculateConnectionNumber(lifePath, expression);
     const birthday = calculateBirthDayNumber(day);
     const balance = calculateBalanceNumber(name);
+    const passion = calculatePassionNumber(name);
+    const stage = calculateLifeStages(day, month, year);
+    const challenge = calculateChallengeNumber(day, month, year);
+    const yearNumber = calculatePersonalYear(year);
+    const monthNumber = calculatePersonalMonth(month);
+    const dayNumber = calculatePersonalDay(day);
+    const phiVatchat = Phivatchat(name);
+    const vatchat = Vatchat(name);
+    const tools = Congcuphuongtien(name);
+    const debt = checkForKarmicDebtNumbers(name);
+    const missingNumbers = calculateMissingNumbers(name);
+    const intellectual = calculateIntellectualNumber(name);
+    const subconscious = calculateSMTT(name);
+    const soulPersonalityConnection = calculateSoulPersonalityConnection(soulUrge, personality);
 
     // --- Load ý nghĩa từ Firestore ---
     const meanings = {
@@ -758,10 +775,24 @@ window.generateResults = async function () {
         maturity: await loadMeaning("truong_thanh", maturity),
         connection: await loadMeaning("ket_noi", connection),
         birthday: await loadMeaning("ngay_sinh", birthday),
-        balance: await loadMeaning("can_bang", balance)
+        balance: await loadMeaning("can_bang", balance),
+        passion: await loadMeaning("dam_me", passion),
+        stage: await loadMeaning("cham", stage),
+        challenge: await loadMeaning("thach_thuc", challenge),
+        yearNumber: await loadMeaning("nam", yearNumber),
+        monthNumber: await loadMeaning("thang", monthNumber),
+        dayNumber: await loadMeaning("ngay", dayNumber),
+        phiVatchat: await loadMeaning("phi_vat_chat", phiVatchat),
+        vatchat: await loadMeaning("vat_chat", vatchat),
+        tools: await loadMeaning("cong_cu_phuong_tien", tools),
+        debt: await loadMeaning("no_nghiep", debt),
+        missingNumbers: await loadMeaning("so_thieu", missingNumbers),
+        intellectual: await loadMeaning("tu_duy_ly_tri", intellectual),
+        subconscious: await loadMeaning("suc_manh_tiem_thuc", subconscious),
+        soulPersonalityConnection: await loadMeaning("ket_noi_linh_hon_nhan_cach", soulPersonalityConnection)
     };
 
-    // --- Hiển thị ---
+    // --- Hiển thị kết quả ---
     const resultBox = document.getElementById("resultBox");
     resultBox.style.display = "block";
     resultBox.innerHTML = `
@@ -773,5 +804,19 @@ window.generateResults = async function () {
         <h3>🔗 Kết nối: ${connection}</h3><p>${meanings.connection}</p>
         <h3>📅 Ngày sinh: ${birthday}</h3><p>${meanings.birthday}</p>
         <h3>⚖️ Số cân bằng: ${balance}</h3><p>${meanings.balance}</p>
+        <h3>🔥 Đam mê: ${passion}</h3><p>${meanings.passion}</p>
+        <h3>🏁 Chặng: ${stage}</h3><p>${meanings.stage}</p>
+        <h3>💪 Thách thức: ${challenge}</h3><p>${meanings.challenge}</p>
+        <h3>🗓️ Năm: ${yearNumber}</h3><p>${meanings.yearNumber}</p>
+        <h3>📆 Tháng: ${monthNumber}</h3><p>${meanings.monthNumber}</p>
+        <h3>📅 Ngày: ${dayNumber}</h3><p>${meanings.dayNumber}</p>
+        <h3>💎 Phi Vật Chất: ${phiVatchat}</h3><p>${meanings.phiVatchat}</p>
+        <h3>🏠 Vật Chất: ${vatchat}</h3><p>${meanings.vatchat}</p>
+        <h3>🛠️ Công cụ phương tiện: ${tools}</h3><p>${meanings.tools}</p>
+        <h3>⚖️ Nợ Nghiệp: ${debt}</h3><p>${meanings.debt}</p>
+        <h3>❌ Số thiếu: ${missingNumbers}</h3><p>${meanings.missingNumbers}</p>
+        <h3>🧠 Tư duy lý trí: ${intellectual}</h3><p>${meanings.intellectual}</p>
+        <h3>💭 Sức mạnh tiềm thức: ${subconscious}</h3><p>${meanings.subconscious}</p>
+        <h3>🔗 Kết nối Linh Hồn - Nhân Cách: ${soulPersonalityConnection}</h3><p>${meanings.soulPersonalityConnection}</p>
     `;
 };
