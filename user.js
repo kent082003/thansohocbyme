@@ -734,7 +734,12 @@ function Congcuphuongtien(day, month, year, name) {
 // -----------------------
 // -----------------------
 // Hàm hiển thị kết quả
+
 // -----------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+   
+
 window.generateResults = async function () {
     const name = document.getElementById("name").value;
     const day = parseInt(document.getElementById("day").value);
@@ -824,3 +829,6 @@ window.generateResults = async function () {
         <h3>🔗 Kết nối Linh Hồn - Nhân Cách: ${soulPersonalityConnection}</h3><p>${meanings.soulPersonalityConnection}</p>
     `;
 };
+
+
+});
