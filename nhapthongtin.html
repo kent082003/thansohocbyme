@@ -27,9 +27,54 @@ p { margin: 0 0 15px; }
 
 <div id="resultBox"></div>
 
-<!-- Firebase v9 modular -->
-<script type="module" src="firebase.js"></script>
-<script type="module" src="user.js"></script>
+<script>
+    // --- Load saved data when page opens ---
+    window.onload = function() {
+        const savedData = JSON.parse(localStorage.getItem("userData"));
+        if (savedData) {
+            document.getElementById("name").value = savedData.name;
+            document.getElementById("day").value = savedData.day;
+            document.getElementById("month").value = savedData.month;
+            document.getElementById("year").value = savedData.year;
+        }
+    };
+
+    // --- Save user data ---
+    function saveUserData() {
+        const name = document.getElementById("name").value;
+        const day = document.getElementById("day").value;
+        const month = document.getElementById("month").value;
+        const year = document.getElementById("year").value;
+
+        const userData = { name, day, month, year };
+        localStorage.setItem("userData", JSON.stringify(userData));
+    }
+
+    // --- Example generateResults ---
+    async function generateResults() {
+        const name = document.getElementById("name").value;
+        const day = parseInt(document.getElementById("day").value);
+        const month = parseInt(document.getElementById("month").value);
+        const year = parseInt(document.getElementById("year").value);
+
+        if (!name || !day || !month || !year) {
+            alert("Bạn phải nhập đầy đủ thông tin!");
+            return;
+        }
+
+        // --- Call your numerology functions here ---
+        // const lifePath = calculateLifePathNumber(day, month, year);
+        // ...other calculations...
+
+        // Save data
+        saveUserData();
+
+        // Display result (example)
+        const resultBox = document.getElementById("resultBox");
+        resultBox.style.display = "block";
+        resultBox.innerHTML = `<h3>Chào ${name}!</h3><p>Dữ liệu của bạn đã được lưu và sẽ được tự động điền lần sau.</p>`;
+    }
+</script>
 
 </body>
 </html>
