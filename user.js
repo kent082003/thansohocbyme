@@ -791,8 +791,8 @@ window.generateResults = async function () {
     const birthday = calculateBirthDayNumber(day);
     const balance = calculateBalanceNumber(name);
     const passion = calculatePassionNumbers(name);
-    const stage = calculateLifeStages(day, month, year);
-    const challenge = calculateChallengeNumbers(day, month, year);
+    //const stage = calculateLifeStages(day, month, year);
+  //  const challenge = calculateChallengeNumbers(day, month, year);
     const yearNumber = calculatePersonalYear(year);
     const monthNumber = calculatePersonalMonth(month);
     const dayNumber = calculatePersonalDay(day);
@@ -820,7 +820,14 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         birthday: await loadMeaning("ngay_sinh", birthday),
         balance: await loadMeaning("can_bang", balance),
         passion: await loadMeaning("dam_me", passion),
-        stage: await loadMeaning("cham", stage),
+     
+				
+			
+		  stage1: await loadMeaning("chang", stage1),
+		  stage2: await loadMeaning("chang", stage2),
+		  stage3: await loadMeaning("chang", stage3),
+		  stage4: await loadMeaning("chang", stage4)
+
         challenge: await loadMeaning("thach_thuc", challenge),
         yearNumber: await loadMeaning("nam", yearNumber),
         monthNumber: await loadMeaning("thang", monthNumber),
@@ -852,7 +859,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         <h3>📅 Ngày sinh: ${birthday}</h3><p>${meanings.birthday}</p>
         <h3>⚖️ Số cân bằng: ${balance}</h3><p>${meanings.balance}</p>
         <h3>🔥 Đam mê: ${passion}</h3><p>${meanings.passion}</p>
-        <h3>🏁 Chặng: ${stage}</h3><p>${meanings.stage}</p>
+        <h3>🏁 Chặng: ${stage1}, ${stage2}, ${stage3}, ${stage4}</h3><p>${meanings.stage1},${meanings.stage2},${meanings.stage3},${meanings.stage4}</p>
         <h3>💪 Thách thức: ${challenge}</h3><p>${meanings.challenge}</p>
         <h3>🗓️ Năm: ${yearNumber}</h3><p>${meanings.yearNumber}</p>
         <h3>📆 Tháng: ${monthNumber}</h3><p>${meanings.monthNumber}</p>
