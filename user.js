@@ -793,7 +793,7 @@ window.generateResults = async function () {
     const passion = calculatePassionNumbers(name);
     //const stage = calculateLifeStages(day, month, year);
     const challenge = calculateChallengeNumbers(day, month, year);
-    const yearNumber = calculatePersonalYear(year);
+    const yearNumber = calculatePersonalYear(day, month, year);
     const monthNumber = calculatePersonalMonth(month);
     const dayNumber = calculatePersonalDay(day);
    const phivatchat = Phivatchat(day, month, year,name);
@@ -827,8 +827,12 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
 		  stage2: await loadMeaning("chang", stage2),
 		  stage3: await loadMeaning("chang", stage3),
 		  stage4: await loadMeaning("chang", stage4),
+		    challenge1: await loadMeaning("thach_thuc", challenge1),
+  challenge2: await loadMeaning("thach_thuc", challenge2),
+  challenge3: await loadMeaning("thach_thuc", challenge3),
+  challenge4: await loadMeaning("thach_thuc", challenge4),
 
-        challenge: await loadMeaning("thach_thuc", challenge),
+   
         yearNumber: await loadMeaning("nam", yearNumber),
         monthNumber: await loadMeaning("thang", monthNumber),
         dayNumber: await loadMeaning("ngay", dayNumber),
@@ -860,7 +864,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         <h3>⚖️ Số cân bằng: ${balance}</h3><p>${meanings.balance}</p>
         <h3>🔥 Đam mê: ${passion}</h3><p>${meanings.passion}</p>
         <h3>🏁 Chặng: ${stage1}, ${stage2}, ${stage3}, ${stage4}</h3><p>${meanings.stage1},${meanings.stage2},${meanings.stage3},${meanings.stage4}</p>
-        <h3>💪 Thách thức: ${challenge}</h3><p>${meanings.challenge}</p>
+        <h3>💪 Thách thức: ${challenge1},${challenge2},${challenge3},${challenge4}</h3><p>${meanings.challenge1},${meanings.challenge2},${meanings.challenge3},${meanings.challenge4}</p>
         <h3>🗓️ Năm: ${yearNumber}</h3><p>${meanings.yearNumber}</p>
         <h3>📆 Tháng: ${monthNumber}</h3><p>${meanings.monthNumber}</p>
         <h3>📅 Ngày: ${dayNumber}</h3><p>${meanings.dayNumber}</p>
