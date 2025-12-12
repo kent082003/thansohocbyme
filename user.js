@@ -819,7 +819,7 @@ window.generateResults = async function () {
  
 
 
-     const vatchat = Vatchat_1(day, month, year,name);
+     const vatchat = Vatchat_v1(day, month, year,name);
 
     const tools = Congcuphuongtien(day, month, year,name);
 	    const { challenge1, challenge2, challenge3, challenge4 } = calculateChallengeNumbers(day, month, year);
