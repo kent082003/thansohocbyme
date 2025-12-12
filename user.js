@@ -740,7 +740,26 @@ function Congcuphuongtien(day, month, year, name) {
 document.addEventListener("DOMContentLoaded", () => {
    
 window.generateResults = async function () {
-	console.log(document.getElementById("name"));
+	
+
+    const el = document.getElementById("name");
+    console.log("Element:", el);
+
+    if (!el) {
+        alert("ERROR: Không tìm thấy input id='name' trong HTML!");
+        return;
+    }
+
+    const name = el.value;
+    console.log("Name value:", name);
+
+    if (!name.trim()) {
+        alert("ERROR: Input name tồn tại nhưng giá trị trống!");
+        return;
+    }
+
+    alert("Tên lấy được: " + name);
+
 
     const name = document.getElementById("name").value;
     const day = parseInt(document.getElementById("day").value);
