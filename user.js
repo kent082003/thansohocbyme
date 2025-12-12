@@ -739,8 +739,9 @@ function Congcuphuongtien(day, month, year, name) {
 
 document.addEventListener("DOMContentLoaded", () => {
    
-
 window.generateResults = async function () {
+	console.log(document.getElementById("name"));
+
     const name = document.getElementById("name").value;
     const day = parseInt(document.getElementById("day").value);
     const month = parseInt(document.getElementById("month").value);
