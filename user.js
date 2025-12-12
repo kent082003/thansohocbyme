@@ -692,6 +692,44 @@ function Phivatchat(day, month, year, name) {
    return ["..."];
   }
 }
+/**
+ * Tính phi vật chất (karmic debt) dựa trên ngày sinh và tên
+ * Trả về mảng các số phi vật chất
+ */
+function Phivatchat_v1(day, month, year, name) {
+  console.log("NAME BEFORE ALL CALCULATIONS phi vat chat:", name);
+
+  const karmicDebtNumbers = [11, 2, 6, 9, 33];
+
+  // Tính các con số
+  const lifePath = calculateLifePathNumber(day, month, year);
+  const expression = calculateExpressionNumberByWord(name);
+  const personality = calculatePersonalityNumber(name);
+  const soulUrge = calculateSoulUrgeNumber(name);
+
+  const allNumbers = [lifePath, expression, personality, soulUrge];
+
+  // Lọc ra các số phi vật chất
+  const foundKarmicDebtNumbers = allNumbers.filter(num => karmicDebtNumbers.includes(num));
+
+  return foundKarmicDebtNumbers.length > 0 ? foundKarmicDebtNumbers : [];
+}
+async function loadMeaningSafe(type, numbers) {
+  if (!numbers || numbers.length === 0) return ["Không có phi vật chất"];
+
+  // Nếu numbers là array, map từng số
+  const results = [];
+  for (const num of numbers) {
+    // Chuyển path an toàn (string, không chứa dấu /)
+    const safeKey = String(num); 
+    const meaning = await loadMeaning(type, safeKey);
+    results.push(`${num}: ${meaning}`);
+  }
+
+  return results; // trả về mảng string có ý nghĩa cho từng số
+}
+
+
 function Vatchat(day, month, year, name) {
   const karmicDebtNumbers = [4,7,22];
 
@@ -796,7 +834,10 @@ window.generateResults = async function () {
     const yearNumber = calculatePersonalYear(day, month, year);
     const monthNumber = calculatePersonalMonth(month);
     const dayNumber = calculatePersonalDay(day);
-   const phivatchat = Phivatchat(day, month, year,name);
+   const Phivatchat = Phivatchat(day, month, year,name);
+ 
+
+
      const vatchat = Vatchat(day, month, year,name);
 
     const tools = Congcuphuongtien(day, month, year,name);
@@ -836,7 +877,9 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         yearNumber: await loadMeaning("nam", yearNumber),
         monthNumber: await loadMeaning("thang", monthNumber),
         dayNumber: await loadMeaning("ngay", dayNumber),
-        Phivatchat: await loadMeaning("phi_vat_chat", Phivatchat),
+       // Phivatchat: await loadMeaning("phi_vat_chat", Phivatchat),
+		phiVatchat = await loadMeaningSafe("phi_vat_chat", Phivatchat);
+
      //   vatchat: await loadMeaning("vat_chat", vatchat),
       //  tools: await loadMeaning("cong_cu_phuong_tien", tools),
      //   debt: await loadMeaning("no_nghiep", debt),
