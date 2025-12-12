@@ -585,7 +585,7 @@ function calculateChallengeNumbers(day, month, year) {
   const challenge2 = reduceToPositiveDifference(reducedDay, reducedYearSum);
   const challenge3 = reduceToPositiveDifference(challenge1, challenge2);
   const challenge4 = reduceToPositiveDifference(reducedMonth, reducedYearSum);
-
+ console.log("challenge2:", challenge2);
   // Return all challenge numbers
   return { challenge1, challenge2, challenge3, challenge4 };
 }
@@ -792,7 +792,7 @@ window.generateResults = async function () {
     const balance = calculateBalanceNumber(name);
     const passion = calculatePassionNumbers(name);
     //const stage = calculateLifeStages(day, month, year);
-    const challenge = calculateChallengeNumbers(day, month, year);
+ //  const challenge = calculateChallengeNumbers(day, month, year);
     const yearNumber = calculatePersonalYear(day, month, year);
     const monthNumber = calculatePersonalMonth(month);
     const dayNumber = calculatePersonalDay(day);
@@ -822,15 +822,15 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         passion: await loadMeaning("dam_me", passion),
      
 				
-			
-		  stage1: await loadMeaning("chang", stage1),
-		  stage2: await loadMeaning("chang", stage2),
-		  stage3: await loadMeaning("chang", stage3),
-		  stage4: await loadMeaning("chang", stage4),
-		    challenge1: await loadMeaning("thach_thuc", challenge1),
-  challenge2: await loadMeaning("thach_thuc", challenge2),
-  challenge3: await loadMeaning("thach_thuc", challenge3),
-  challenge4: await loadMeaning("thach_thuc", challenge4),
+
+		stage1: await loadMeaning("chang", stage1),
+		stage2: await loadMeaning("chang", stage2),
+		stage3: await loadMeaning("chang", stage3),
+		stage4: await loadMeaning("chang", stage4),
+		challenge1: await loadMeaning("thach_thuc", challenge1),
+		challenge2: await loadMeaning("thach_thuc", challenge2),
+		challenge3: await loadMeaning("thach_thuc", challenge3),
+		challenge4: await loadMeaning("thach_thuc", challenge4),
 
    
         yearNumber: await loadMeaning("nam", yearNumber),
