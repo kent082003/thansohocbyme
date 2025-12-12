@@ -836,6 +836,10 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
     };
 
     // --- Hiển thị kết quả ---
+	   //   <h3>💎 Phi Vật Chất: ${phiVatchat}</h3><p>${meanings.phiVatchat}</p>
+      //  <h3>🏠 Vật Chất: ${vatchat}</h3><p>${meanings.vatchat}</p>
+     //   <h3>🛠️ Công cụ phương tiện: ${tools}</h3><p>${meanings.tools}</p>
+	 // <h3>⚖️ Nợ Nghiệp: ${debt}</h3><p>${meanings.debt}</p>
     const resultBox = document.getElementById("resultBox");
     resultBox.style.display = "block";
     resultBox.innerHTML = `
@@ -853,10 +857,8 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         <h3>🗓️ Năm: ${yearNumber}</h3><p>${meanings.yearNumber}</p>
         <h3>📆 Tháng: ${monthNumber}</h3><p>${meanings.monthNumber}</p>
         <h3>📅 Ngày: ${dayNumber}</h3><p>${meanings.dayNumber}</p>
-        <h3>💎 Phi Vật Chất: ${phiVatchat}</h3><p>${meanings.phiVatchat}</p>
-        <h3>🏠 Vật Chất: ${vatchat}</h3><p>${meanings.vatchat}</p>
-        <h3>🛠️ Công cụ phương tiện: ${tools}</h3><p>${meanings.tools}</p>
-        <h3>⚖️ Nợ Nghiệp: ${debt}</h3><p>${meanings.debt}</p>
+  
+       
         <h3>❌ Số thiếu: ${missingNumbers}</h3><p>${meanings.missingNumbers}</p>
         <h3>🧠 Tư duy lý trí: ${intellectual}</h3><p>${meanings.intellectual}</p>
         <h3>💭 Sức mạnh tiềm thức: ${subconscious}</h3><p>${meanings.subconscious}</p>
