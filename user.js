@@ -185,6 +185,9 @@ function calculatePersonalityNumberNoSum(name) {
 }
 
 function calculateSoulUrgeNumber(name) {
+	console.log("NAME BEFORE ALL CALCULATIONS:", name);
+
+	
   const letterToNumber = {
     'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9,
     'j': 1, 'k': 2, 'l': 3, 'm': 4, 'n': 5, 'o': 6, 'p': 7, 'q': 8, 'r': 9,
@@ -209,6 +212,8 @@ function calculateSoulUrgeNumber(name) {
   while (soulUrgeNumber > 9 && soulUrgeNumber !== 11 && soulUrgeNumber !== 22 && soulUrgeNumber !== 33) {
     soulUrgeNumber = soulUrgeNumber.toString().split('').map(Number).reduce((acc, num) => acc + num, 0);
   }
+  console.log("calculatePersonalityNumber received:", name);
+
   return soulUrgeNumber;
 }
 
