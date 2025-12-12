@@ -792,8 +792,7 @@ window.generateResults = async function () {
     const birthday = calculateBirthDayNumber(day);
     const balance = calculateBalanceNumber(name);
     const passion = calculatePassionNumbers(name);
-    //const stage = calculateLifeStages(day, month, year);
- //  const challenge = calculateChallengeNumbers(day, month, year);
+  
     const yearNumber = calculatePersonalYear(day, month, year);
     const monthNumber = calculatePersonalMonth(month);
     const dayNumber = calculatePersonalDay(day);
@@ -837,7 +836,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         yearNumber: await loadMeaning("nam", yearNumber),
         monthNumber: await loadMeaning("thang", monthNumber),
         dayNumber: await loadMeaning("ngay", dayNumber),
-    //    Phivatchat: await loadMeaning("phi_vat_chat", Phivatchat),
+        Phivatchat: await loadMeaning("phi_vat_chat", Phivatchat),
      //   vatchat: await loadMeaning("vat_chat", vatchat),
       //  tools: await loadMeaning("cong_cu_phuong_tien", tools),
      //   debt: await loadMeaning("no_nghiep", debt),
@@ -848,7 +847,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
     };
 
     // --- Hiển thị kết quả ---
-	   //   <h3>💎 Phi Vật Chất: ${phiVatchat}</h3><p>${meanings.phiVatchat}</p>
+	   //   
       //  <h3>🏠 Vật Chất: ${vatchat}</h3><p>${meanings.vatchat}</p>
      //   <h3>🛠️ Công cụ phương tiện: ${tools}</h3><p>${meanings.tools}</p>
 	 // <h3>⚖️ Nợ Nghiệp: ${debt}</h3><p>${meanings.debt}</p>
@@ -869,7 +868,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         <h3>🗓️ Năm: ${yearNumber}</h3><p>${meanings.yearNumber}</p>
         <h3>📆 Tháng: ${monthNumber}</h3><p>${meanings.monthNumber}</p>
         <h3>📅 Ngày: ${dayNumber}</h3><p>${meanings.dayNumber}</p>
-  
+  <h3>💎 Phi Vật Chất: ${phiVatchat}</h3><p>${meanings.phiVatchat}</p>
        
         <h3>❌ Số thiếu: ${missingNumbers}</h3><p>${meanings.missingNumbers}</p>
         <h3>🧠 Tư duy lý trí: ${intellectual}</h3><p>${meanings.intellectual}</p>
