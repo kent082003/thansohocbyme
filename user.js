@@ -826,7 +826,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
 		  stage1: await loadMeaning("chang", stage1),
 		  stage2: await loadMeaning("chang", stage2),
 		  stage3: await loadMeaning("chang", stage3),
-		  stage4: await loadMeaning("chang", stage4)
+		  stage4: await loadMeaning("chang", stage4),
 
         challenge: await loadMeaning("thach_thuc", challenge),
         yearNumber: await loadMeaning("nam", yearNumber),
