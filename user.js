@@ -707,19 +707,35 @@ function Phivatchat_v1(day, month, year, name) {
   return foundKarmicDebtNumbers.length > 0 ? foundKarmicDebtNumbers : [];
 }
 async function loadMeaningSafe(type, numbers) {
-  if (!numbers || numbers.length === 0) return ["Không có phi vật chất"];
+  // Nếu numbers không tồn tại hoặc không phải array, ép về array
+  if (!numbers) numbers = [];
+  if (!Array.isArray(numbers)) numbers = [numbers];
 
-  // Nếu numbers là array, map từng số
+  // Nếu array rỗng, trả về giá trị mặc định
+  if (numbers.length === 0) return ["Không có phi vật chất"];
+
   const results = [];
   for (const num of numbers) {
     // Chuyển path an toàn (string, không chứa dấu /)
-    const safeKey = String(num); 
-    const meaning = await loadMeaning(type, safeKey);
-    results.push(`${num}: ${meaning}`);
+    const safeKey = String(num); // ví dụ "14_5" thay vì "14/5"
+    
+    // Lấy ý nghĩa từ Firebase
+    let meaning = "";
+    try {
+      meaning = await loadMeaning(type, safeKey);
+    } catch (err) {
+      console.warn(`Không tìm thấy ý nghĩa cho ${safeKey}:`, err);
+      meaning = "Chưa có ý nghĩa";
+    }
+
+    // Push dạng hiển thị: "14/5: Ý nghĩa"
+    const displayNum = String(num).replace(/_/g, "/"); // hiển thị đẹp với /
+    results.push(`${displayNum}: ${meaning}`);
   }
 
-  return results; // trả về mảng string có ý nghĩa cho từng số
+  return results;
 }
+
 
 function Vatchat_v1(day, month, year, name) {
   const karmicDebtNumbers = [4, 7, 22];
