@@ -579,7 +579,8 @@ function calculateChallengeNumbers(day, month, year) {
   const reducedYear = reduceToSingleDigit(year);
 
   // Challenge calculations
-  const challenge1 = reduceToPositiveDifference(reducedMonth, reducedDay);
+  const challenge1 = reduceToSingleDigitGeneral(reduceToPositiveDifference(reducedMonth, reducedDay));
+  
   const yearSum = year.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
   const reducedYearSum = reduceToSingleDigit(yearSum);
   const challenge2 = reduceToPositiveDifference(reducedDay, reducedYearSum);
