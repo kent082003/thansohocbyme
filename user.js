@@ -878,7 +878,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         monthNumber: await loadMeaning("thang", monthNumber),
         dayNumber: await loadMeaning("ngay", dayNumber),
        // Phivatchat: await loadMeaning("phi_vat_chat", Phivatchat),
-		phiVatchat: await loadMeaningSafe("phi_vat_chat", Phivatchat),
+		Phivatchat: await loadMeaningSafe("phi_vat_chat", Phivatchat),
 
      //   vatchat: await loadMeaning("vat_chat", vatchat),
       //  tools: await loadMeaning("cong_cu_phuong_tien", tools),
@@ -911,7 +911,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         <h3>🗓️ Năm: ${yearNumber}</h3><p>${meanings.yearNumber}</p>
         <h3>📆 Tháng: ${monthNumber}</h3><p>${meanings.monthNumber}</p>
         <h3>📅 Ngày: ${dayNumber}</h3><p>${meanings.dayNumber}</p>
-  <h3>💎 Phi Vật Chất: ${phiVatchat}</h3><p>${meanings.phiVatchat}</p>
+  <h3>💎 Phi Vật Chất: ${Phivatchat}</h3><p>${meanings.Phivatchat}</p>
        
         <h3>❌ Số thiếu: ${missingNumbers}</h3><p>${meanings.missingNumbers}</p>
         <h3>🧠 Tư duy lý trí: ${intellectual}</h3><p>${meanings.intellectual}</p>
