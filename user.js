@@ -586,7 +586,7 @@ function calculateChallengeNumbers(day, month, year) {
   const challenge2 = reduceToPositiveDifference(reducedDay, reducedYearSum);
   const challenge3 = reduceToPositiveDifference(challenge1, challenge2);
   const challenge4 = reduceToPositiveDifference(reducedMonth, reducedYearSum);
- console.log("challenge2:", challenge2);
+ console.log("challenge1:", challenge1);
   // Return all challenge numbers
   return { challenge1, challenge2, challenge3, challenge4 };
 }
