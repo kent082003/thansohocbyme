@@ -729,55 +729,36 @@ async function loadMeaningSafe(type, numbers) {
   return results; // trả về mảng string có ý nghĩa cho từng số
 }
 
+function Vatchat_v1(day, month, year, name) {
+  const karmicDebtNumbers = [4, 7, 22];
 
-function Vatchat(day, month, year, name) {
-  const karmicDebtNumbers = [4,7,22];
+  const allNumbers = [
+    calculateLifePathNumber(day, month, year),
+    calculateExpressionNumberByWord(name),
+    calculatePersonalityNumber(name),
+    calculateSoulUrgeNumber(name)
+  ];
 
-  // Calculate the numbers
-  //No nghiep
-	const lifePathNoSum = calculateLifePathNumber(day, month, year);  // Updated to take day, month, and year
-	const expressionNumberNoSum = calculateExpressionNumberByWord(name);
-	const personalityNumberNoSum = calculatePersonalityNumber(name);
-	const soulUrgeNumberNoSum = calculateSoulUrgeNumber(name);
-
-  // Combine all numbers into an array
-  const allNumbers = [lifePathNoSum, expressionNumberNoSum, personalityNumberNoSum, soulUrgeNumberNoSum];
-
-  // Check if any of the numbers match karmic debt numbers
   const foundKarmicDebtNumbers = allNumbers.filter(num => karmicDebtNumbers.includes(num));
 
-  if (foundKarmicDebtNumbers.length > 0) {
-  
-    return foundKarmicDebtNumbers;
-  } else {
-   
-    return ["..."];
-  }
+  return foundKarmicDebtNumbers.length > 0 ? foundKarmicDebtNumbers : [];
 }
+
 function Congcuphuongtien(day, month, year, name) {
-  const karmicDebtNumbers = [1,3,5,8];
+  const karmicDebtNumbers = [1, 3, 5, 8];
 
-  // Calculate the numbers
-  //No nghiep
-	const lifePathNoSum = calculateLifePathNumber(day, month, year);  // Updated to take day, month, and year
-	const expressionNumberNoSum = calculateExpressionNumberByWord(name);
-	const personalityNumberNoSum = calculatePersonalityNumber(name);
-	const soulUrgeNumberNoSum = calculateSoulUrgeNumber(name);
+  const allNumbers = [
+    calculateLifePathNumber(day, month, year),
+    calculateExpressionNumberByWord(name),
+    calculatePersonalityNumber(name),
+    calculateSoulUrgeNumber(name)
+  ];
 
-  // Combine all numbers into an array
-  const allNumbers = [lifePathNoSum, expressionNumberNoSum, personalityNumberNoSum, soulUrgeNumberNoSum];
-
-  // Check if any of the numbers match karmic debt numbers
   const foundKarmicDebtNumbers = allNumbers.filter(num => karmicDebtNumbers.includes(num));
 
-  if (foundKarmicDebtNumbers.length > 0) {
-  
-    return foundKarmicDebtNumbers;
-  } else {
-   
-    return ["..."];
-  }
+  return foundKarmicDebtNumbers.length > 0 ? foundKarmicDebtNumbers : [];
 }
+
 // -----------------------
 // Hàm hiển thị kết quả
 // -----------------------
@@ -838,7 +819,7 @@ window.generateResults = async function () {
  
 
 
-     const vatchat = Vatchat(day, month, year,name);
+     const vatchat = Vatchat_1(day, month, year,name);
 
     const tools = Congcuphuongtien(day, month, year,name);
 	    const { challenge1, challenge2, challenge3, challenge4 } = calculateChallengeNumbers(day, month, year);
@@ -879,9 +860,9 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         dayNumber: await loadMeaning("ngay", dayNumber),
        // Phivatchat: await loadMeaning("phi_vat_chat", Phivatchat),
 		Phivatchat: await loadMeaningSafe("phi_vat_chat", Phivatchat),
-
-     //   vatchat: await loadMeaning("vat_chat", vatchat),
-      //  tools: await loadMeaning("cong_cu_phuong_tien", tools),
+ vatchat :  await loadMeaningSafe("vat_chat", vatchat);
+ tools : await loadMeaningSafe("cong_cu_phuong_tien", tools);
+ 
      //   debt: await loadMeaning("no_nghiep", debt),
         missingNumbers: await loadMeaning("so_thieu", missingNumbers),
         intellectual: await loadMeaning("tu_duy_ly_tri", intellectual),
@@ -891,8 +872,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
 
     // --- Hiển thị kết quả ---
 	   //   
-      //  <h3>🏠 Vật Chất: ${vatchat}</h3><p>${meanings.vatchat}</p>
-     //   <h3>🛠️ Công cụ phương tiện: ${tools}</h3><p>${meanings.tools}</p>
+ 
 	 // <h3>⚖️ Nợ Nghiệp: ${debt}</h3><p>${meanings.debt}</p>
     const resultBox = document.getElementById("resultBox");
     resultBox.style.display = "block";
@@ -912,7 +892,8 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         <h3>📆 Tháng: ${monthNumber}</h3><p>${meanings.monthNumber}</p>
         <h3>📅 Ngày: ${dayNumber}</h3><p>${meanings.dayNumber}</p>
   <h3>💎 Phi Vật Chất: ${Phivatchat}</h3><p>${meanings.Phivatchat}</p>
-       
+              <h3>🏠 Vật Chất: ${vatchat}</h3><p>${meanings.vatchat}</p>
+        <h3>🛠️ Công cụ phương tiện: ${tools}</h3><p>${meanings.tools}</p>
         <h3>❌ Số thiếu: ${missingNumbers}</h3><p>${meanings.missingNumbers}</p>
         <h3>🧠 Tư duy lý trí: ${intellectual}</h3><p>${meanings.intellectual}</p>
         <h3>💭 Sức mạnh tiềm thức: ${subconscious}</h3><p>${meanings.subconscious}</p>
