@@ -860,8 +860,8 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         dayNumber: await loadMeaning("ngay", dayNumber),
        // Phivatchat: await loadMeaning("phi_vat_chat", Phivatchat),
 		Phivatchat: await loadMeaningSafe("phi_vat_chat", Phivatchat),
- vatchat :  await loadMeaningSafe("vat_chat", vatchat);
- tools : await loadMeaningSafe("cong_cu_phuong_tien", tools);
+ vatchat :  await loadMeaningSafe("vat_chat", vatchat),
+ tools : await loadMeaningSafe("cong_cu_phuong_tien", tools),
  
      //   debt: await loadMeaning("no_nghiep", debt),
         missingNumbers: await loadMeaning("so_thieu", missingNumbers),
