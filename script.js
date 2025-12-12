@@ -1,7 +1,10 @@
 import { auth, db } from "./firebase.js";
 import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-
+const typeSelect = document.getElementById("typeSelect");
+const numberInput = document.getElementById("numberInput");
+const meaningText = document.getElementById("meaningText");
+const status = document.getElementById("status");
 // LOGIN
 
 window.login = async function () {
