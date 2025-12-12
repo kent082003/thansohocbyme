@@ -11,7 +11,7 @@ window.login = async function () {
     try {
         await signInWithEmailAndPassword(auth, email, password);
         alert("Đăng nhập thành công!");
-        window.location.href = "admin.html";
+       
     } catch (error) {
         alert("Sai email hoặc mật khẩu: " + error.message);
     }
