@@ -665,6 +665,9 @@ function checkForKarmicDebtNumbers(day, month, year, name) {
 
 
 function Phivatchat(day, month, year, name) {
+	
+	console.log("NAME BEFORE ALL CALCULATIONS phi vat chat:", name);
+
   const karmicDebtNumbers = [11,2,6,9,33];
 
   // Calculate the numbers
@@ -793,10 +796,14 @@ window.generateResults = async function () {
     const yearNumber = calculatePersonalYear(year);
     const monthNumber = calculatePersonalMonth(month);
     const dayNumber = calculatePersonalDay(day);
-    const phiVatchat = Phivatchat(name);
-    const vatchat = Vatchat(name);
-    const tools = Congcuphuongtien(name);
-    const debt = checkForKarmicDebtNumbers(name);
+   const phivatchat = Phivatchat(day, month, year,name);
+     const vatchat = Vatchat(day, month, year,name);
+
+    const tools = Congcuphuongtien(day, month, year,name);
+	    const { challenge1, challenge2, challenge3, challenge4 } = calculateChallengeNumbers(day, month, year);
+
+const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year);
+    const debt = checkForKarmicDebtNumbers(day, month, year,name);
     const missingNumbers = calculateMissingNumbers(name);
     const intellectual = calculateIntellectualNumber(name);
     const subconscious = calculateSMTT(name);
