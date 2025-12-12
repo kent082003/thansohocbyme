@@ -51,6 +51,8 @@ function calculateLifePathNumberNoSum(day, month, year) {
   return sum;
 }
 function calculateExpressionNumberByWord(name) {
+	console.log("NAME BEFORE ALL CALCULATIONS:", name);
+
 	if (!name) {
     console.warn("Name is empty or undefined!");
     return 0; // or any default number you want
