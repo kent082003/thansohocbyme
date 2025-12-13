@@ -894,6 +894,7 @@ loadBtn.addEventListener("click", async () => {
         console.error("Lỗi khi tải dữ liệu:", err);
         resultBox.innerHTML = "Lỗi khi tải dữ liệu!";
     }
+	});
 // -----------------------
 // Hàm hiển thị kết quả
 // -----------------------
