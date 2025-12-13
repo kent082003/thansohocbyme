@@ -644,7 +644,10 @@ function checkForKarmicDebtNumbers(day, month, year, name) {
   const expressionNumberNoSum = calculateExpressionNumberByWordNoSum(name);
   const personalityNumberNoSum = calculatePersonalityNumberNoSum(name);
   const soulUrgeNumberNoSum = calculateSoulUrgeNumberNoSum(name);
-
+	   console.log("lifePathNoSum.",lifePathNoSum);
+	    console.log("expressionNumberNoSum.",expressionNumberNoSum);
+		 console.log("personalityNumberNoSum.",lifePathNoSum);
+		  console.log("soulUrgeNumberNoSum.",soulUrgeNumberNoSum);
   const allNumbers = [lifePathNoSum, expressionNumberNoSum, personalityNumberNoSum, soulUrgeNumberNoSum];
 
   const foundKarmicDebtNumbers = allNumbers.filter(num => karmicDebtNumbers.includes(num));
