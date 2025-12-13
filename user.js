@@ -1007,7 +1007,10 @@ document.getElementById('toggleMeaningBtn').addEventListener('click', () => {
     buildTable(); // gọi lại hàm tạo bảng
 });
 
-
+function generateResults() {
+   
+    buildTable();
+}
 
 const dataRows = [
   {label:"🔢 Đường đời",value:lifePath,meaning:meanings.lifePath},
