@@ -88,3 +88,18 @@ tr:hover {
 .delete-btn:hover {
   background-color: #d9363e;
 }
+/* responsive for mobile */
+@media (max-width: 480px) {
+    .admin-box {
+        width: 95%;
+        padding: 15px;
+    }
+
+    input, select, textarea, button {
+        font-size: 14px;
+    }
+
+    th, td {
+        font-size: 14px;
+        padding: 10px;
+    }

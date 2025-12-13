@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>Admin - Numerology CMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 
 <!-- Module imports (required for v9) -->
@@ -86,7 +87,9 @@ onAuthStateChanged(auth, (user) => {
         <textarea id="meaningText" placeholder="Nhập nội dung..."></textarea>
 
         <button onclick="saveMeaning()">💾 Save</button>
+		<button onclick="meaningText.value=''">🧹 Clear</button>
         <button onclick="logout()">Logout</button>
+<button onclick="nextNumber()">Next ⏭️</button>
 
         <p id="status" style="font-weight:bold;color:green;"></p>
     </div>
