@@ -825,7 +825,7 @@ saveBtn.addEventListener("click", async () => {
     }
 });
 
-
+// Load danh sách user
 loadBtn.addEventListener("click", async () => {
     resultBox.innerHTML = "Đang tải dữ liệu...";
     resultBox.style.display = "block";
@@ -843,28 +843,52 @@ loadBtn.addEventListener("click", async () => {
         querySnapshot.forEach(docItem => {
             const data = docItem.data();
             html += `
-                <div class="user-item" data-id="${docItem.id}" 
-                     style="padding:10px; margin-bottom:10px; background:#fff; border-radius:6px; cursor:pointer;">
-                    <strong>${data.name}</strong><br>
-                    Ngày sinh: ${data.day}/${data.month}/${data.year}
+                <div class="user-item" data-id="${docItem.id}" style="display:flex; justify-content:space-between; align-items:center;">
+                    <div class="user-info" style="cursor:pointer;">
+                        <strong>${data.name}</strong><br>
+                        Ngày sinh: ${data.day}/${data.month}/${data.year}
+                    </div>
+                    <button class="delete-btn" data-id="${docItem.id}" style="margin-left:10px;">Xóa</button>
                 </div>
             `;
         });
 
         resultBox.innerHTML = html;
 
-        // 🔹 Gắn sự kiện click sau khi HTML được thêm
-        document.querySelectorAll(".user-item").forEach(item => {
+        // Click vào user-info để load vào form
+        document.querySelectorAll(".user-info").forEach(item => {
             item.addEventListener("click", async () => {
-                const id = item.dataset.id;
-                const docSnap = await getDoc(doc(db, "users", id));
-                if (docSnap.exists()) {
-                    const d = docSnap.data();
-                    document.getElementById("name").value = d.name;
-                    document.getElementById("day").value = d.day;
-                    document.getElementById("month").value = d.month;
-                    document.getElementById("year").value = d.year;
-                    alert("Đã tải dữ liệu. Giờ bạn có thể tính lại!");
+                const id = item.parentElement.dataset.id;
+                try {
+                    const docSnap = await getDoc(doc(db, "users", id));
+                    if (docSnap.exists()) {
+                        const d = docSnap.data();
+                        document.getElementById("name").value = d.name;
+                        document.getElementById("day").value = d.day;
+                        document.getElementById("month").value = d.month;
+                        document.getElementById("year").value = d.year;
+                        alert("Đã tải dữ liệu vào form!");
+                    }
+                } catch (err) {
+                    console.error("Lỗi khi load user:", err);
+                    alert("Không thể tải dữ liệu.");
+                }
+            });
+        });
+
+        // Xử lý nút delete
+        document.querySelectorAll(".delete-btn").forEach(btn => {
+            btn.addEventListener("click", async () => {
+                const id = btn.dataset.id;
+                if (confirm("Bạn có chắc muốn xóa dữ liệu này?")) {
+                    try {
+                        await deleteDoc(doc(db, "users", id));
+                        alert("Đã xóa dữ liệu!");
+                        loadBtn.click(); // reload danh sách sau khi xóa
+                    } catch (err) {
+                        console.error("Lỗi khi xóa:", err);
+                        alert("Không thể xóa dữ liệu!");
+                    }
                 }
             });
         });
