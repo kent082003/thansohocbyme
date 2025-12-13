@@ -1034,6 +1034,3 @@ resultBox.innerHTML = `
     </tbody>
   </table>
 `;
-
-
-});
