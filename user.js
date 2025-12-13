@@ -402,6 +402,49 @@ function calculateIntellectualNumber(name) {
   return intellectualNumber;
 }
 
+function calculateRationalThinkingNumber(fullName, birthDay) {
+  const letterToNumber = {
+    'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9,
+    'j': 1, 'k': 2, 'l': 3, 'm': 4, 'n': 5, 'o': 6, 'p': 7, 'q': 8, 'r': 9,
+    's': 1, 't': 2, 'u': 3, 'v': 4, 'w': 5, 'x': 6, 'y': 7, 'z': 8
+  };
+
+  // Extract last word from the full name
+  const nameArray = fullName.trim().split(" ");
+  const lastName = nameArray[nameArray.length - 1];
+
+  // Calculate the numeric value of the last name
+  const nameLower = lastName.toLowerCase();
+  let nameSum = 0;
+  nameLower.split('').forEach(char => {
+    if (letterToNumber[char]) {
+      nameSum += letterToNumber[char];
+    }
+  });
+
+ const dayString = String(birthDay); // Cast birthDay to string if it's not
+  const daySum = dayString.split('').reduce((sum, digit) => {
+    return digit.match(/\d/) ? sum + parseInt(digit) : sum;
+  }, 0);
+
+  // Calculate the total sum
+  let totalSum = nameSum + daySum;
+
+  // Handle reduction, keeping master numbers
+  const reduceToSingleDigitOrMaster = (num) => {
+    while (num > 9 && num !== 11 && num !== 22 && num !== 33) {
+      num = num
+        .toString()
+        .split('')
+        .reduce((sum, digit) => sum + parseInt(digit), 0);
+    }
+    return num;
+  };
+
+  // Final reduced result
+  return reduceToSingleDigitOrMaster(totalSum);
+}
+
 function calculatePassionNumbers(name) {
   const letterToNumber = {
     'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9,
@@ -936,7 +979,7 @@ window.generateResults = async function () {
 
     const yearNumber = calculatePersonalYear(day, month, currentYear);
     const monthNumber = calculatePersonalMonth(yearNumber);
-    const dayNumber = calculatePersonalDay(day);
+    const dayNumber = calculatePersonalDay(monthNumber);
    const Phivatchat = Phivatchat_v1(day, month, year,name);
    const conneclifeandexpression = calculateConnectionNumber(lifePath,expression);
  
@@ -950,7 +993,7 @@ window.generateResults = async function () {
 const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year);
     const debt = checkForKarmicDebtNumbers(day, month, year,name);
     const missingNumbers = calculateMissingNumbers(name);
-    const intellectual = calculateIntellectualNumber(name);
+    const intellectual = calculateRationalThinkingNumber(name,day);
     const subconscious = calculateSMTT(name);
     const soulPersonalityConnection = calculateSoulPersonalityConnection(soulUrge, personality);
 
