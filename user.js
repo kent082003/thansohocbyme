@@ -1,6 +1,7 @@
 import { db } from "./firebase.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-
+import { collection, addDoc, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 // -----------------------
 // Hàm load ý nghĩa từ Firestore
 // -----------------------
@@ -766,6 +767,109 @@ function Congcuphuongtien(day, month, year, name) {
 
   return foundKarmicDebtNumbers.length > 0 ? foundKarmicDebtNumbers : [];
 }
+//ham luu thong tin input
+
+
+const saveBtn = document.getElementById("saveBtn");
+
+saveBtn.addEventListener("click", async () => {
+    const name = document.getElementById("name").value;
+    const day = document.getElementById("day").value;
+    const month = document.getElementById("month").value;
+    const year = document.getElementById("year").value;
+
+    if (!name || !day || !month || !year) {
+        alert("Vui lòng nhập đầy đủ thông tin!");
+        return;
+    }
+
+    try {
+        await addDoc(collection(db, "users"), {
+            name: name,
+            day: Number(day),
+            month: Number(month),
+            year: Number(year),
+            createdAt: new Date()
+        });
+
+        alert("Đã lưu thành công vào Firebase!");
+    } catch (err) {
+        console.error("Lỗi khi lưu:", err);
+        alert("Không thể lưu dữ liệu!");
+    }
+});
+
+
+
+const loadBtn = document.getElementById("loadBtn");
+const resultBox = document.getElementById("resultBox");
+
+loadBtn.addEventListener("click", async () => {
+    resultBox.innerHTML = "Đang tải dữ liệu...";
+    resultBox.style.display = "block";
+
+    try {
+        const querySnapshot = await getDocs(collection(db, "users"));
+
+        if (querySnapshot.empty) {
+            resultBox.innerHTML = "Chưa có dữ liệu!";
+            return;
+        }
+
+        let html = "<h2>Danh sách người dùng đã lưu</h2>";
+
+        querySnapshot.forEach(doc => {
+            const data = doc.data();
+
+            html += `
+                <div style="padding:10px; margin-bottom:10px; background:#fff; border-radius:6px;">
+                    <strong>${data.name}</strong><br>
+                    Ngày sinh: ${data.day}/${data.month}/${data.year}
+                </div>
+            `;
+        });
+
+        resultBox.innerHTML = html;
+
+    } catch (err) {
+        console.error("Error loading:", err);
+        resultBox.innerHTML = "Lỗi khi tải dữ liệu!";
+    }
+});
+
+querySnapshot.forEach(doc => {
+    const data = doc.data();
+
+    html += `
+        <div class="user-item" data-id="${doc.id}" 
+             style="padding:10px; margin-bottom:10px; background:#fff; border-radius:6px; cursor:pointer;">
+            <strong>${data.name}</strong><br>
+            Ngày sinh: ${data.day}/${data.month}/${data.year}
+        </div>
+    `;
+});
+document.querySelectorAll(".user-item").forEach(item => {
+    item.addEventListener("click", async () => {
+        const id = item.dataset.id;
+
+        // Load Firestore doc by ID
+        const docRef = doc(db, "users", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const d = docSnap.data();
+
+            // Put data back to form:
+            document.getElementById("name").value = d.name;
+            document.getElementById("day").value = d.day;
+            document.getElementById("month").value = d.month;
+            document.getElementById("year").value = d.year;
+
+            alert("Đã tải dữ liệu. Giờ bạn có thể tính lại!");
+        }
+    });
+});
+
 
 // -----------------------
 // Hàm hiển thị kết quả
