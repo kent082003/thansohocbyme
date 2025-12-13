@@ -1001,11 +1001,10 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
 	   //   
  // 👉 Format: VALUE giữ 1 dòng, MEANING mỗi ý nghĩa 1 dòng
 function formatMeaningEachLine(text) {
-  if (text == null) return '';   // null hoặc undefined
-  text = String(text);           // ép kiểu sang string
+  if (!text) return '';
 
   return text
-    .split(/\n|,/)               // tách theo xuống dòng hoặc dấu phẩy
+    .split(/\n|,/)
     .map(t => t.trim())
     .filter(t => t)
     .map(t => `• ${t}`)
@@ -1050,9 +1049,9 @@ for (let i = 0; i < dataRows.length; i += 3) {
       tableHtml += `
       <td style="padding:12px;border:1px solid #ddd;vertical-align:top;background:${(i+j)%2===0?'#f0f4ff':'#fff'};width:33%;">
         <div style="font-weight:bold;margin-bottom:4px;">${item.label}</div>
-     <div style="font-size:13px;color:#555;line-height:1.6;">
-  ${formatMeaningEachLine(item.meaning)}
-</div>
+        <div style="font-size:26px;font-weight:700;color:#d60000;margin-bottom:4px;">
+          ${item.value ?? '-'}
+        </div>
         <div style="font-size:13px;color:#555;line-height:1.4;">
           ${item.meaning ?? ''}
         </div>
