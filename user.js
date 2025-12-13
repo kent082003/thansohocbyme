@@ -993,44 +993,47 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
 	   //   
  
 	 // 
-const resultBox = document.getElementById("resultBox");
-resultBox.style.display = "block";
+// 1️⃣ Tạo array dữ liệu
+const dataRows = [
+  {label: "🔢 Đường đời", value: lifePath, meaning: meanings.lifePath},
+  {label: "🎯 Sứ mệnh", value: expression, meaning: meanings.expression},
+  {label: "🔗 Kết nối Đường đời- Sứ mệnh", value: conneclifeandexpression, meaning: meanings.conneclifeandexpression},
+  {label: "💖 Linh hồn", value: soulUrge, meaning: meanings.soulUrge},
+  {label: "😎 Nhân cách", value: personality, meaning: meanings.personality},
+  {label: "🔗 Kết nối Linh Hồn - Nhân Cách", value: soulPersonalityConnection, meaning: meanings.soulPersonalityConnection},
+  {label: "🌟 Trưởng thành", value: maturity, meaning: meanings.maturity},
+  {label: "📅 Ngày sinh", value: birthday, meaning: meanings.birthday},
+  {label: "⚖️ Số cân bằng", value: balance, meaning: meanings.balance},
+  {label: "🔥 Đam mê", value: passion, meaning: meanings.passion},
+  {label: "🏁 Chặng", value: `${stage1}, ${stage2}, ${stage3}, ${stage4}`, meaning: `${meanings.stage1}, ${meanings.stage2}, ${meanings.stage3}, ${meanings.stage4}`},
+  {label: "💪 Thách thức", value: `${challenge1}, ${challenge2}, ${challenge3}, ${challenge4}`, meaning: `${meanings.challenge1}, ${meanings.challenge2}, ${meanings.challenge3}, ${meanings.challenge4}`},
+  {label: "🗓️ Năm", value: yearNumber, meaning: meanings.yearNumber},
+  {label: "📆 Tháng", value: monthNumber, meaning: meanings.monthNumber},
+  {label: "📅 Ngày", value: dayNumber, meaning: meanings.dayNumber},
+  {label: "💎 Phi Vật Chất", value: Phivatchat, meaning: meanings.Phivatchat},
+  {label: "🏠 Vật Chất", value: vatchat, meaning: meanings.vatchat},
+  {label: "🛠️ Công cụ phương tiện", value: tools, meaning: meanings.tools},
+  {label: "⚖️ Nợ Nghiệp", value: debt, meaning: meanings.debt},
+  {label: "❌ Số thiếu", value: missingNumbers, meaning: meanings.missingNumbers},
+  {label: "🧠 Tư duy lý trí", value: intellectual, meaning: meanings.intellectual},
+  {label: "💭 Sức mạnh tiềm thức", value: subconscious, meaning: meanings.subconscious}
+];
 
+// 2️⃣ Tạo HTML cho bảng
+const tableRows = dataRows.map((item, index) => `
+  <tr style="background:${index % 2 === 0 ? '#f0f4ff' : '#f9f9f9'}">
+    <th style="padding:10px; text-align:left; width:30%">${item.label}</th>
+    <td style="padding:10px;">
+      <strong>${item.value ?? '-'}</strong><br>
+      <small style="color:#555;">${item.meaning ?? '-'}</small>
+    </td>
+  </tr>
+`).join('');
+
+// 3️⃣ Gán vào resultBox
+resultBox.style.display = "block";
 resultBox.innerHTML = `
-  <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; margin-top:15px;">
-    <tbody>
-      ${[
-        {label: "🔢 Đường đời", value: lifePath, meaning: meanings.lifePath},
-        {label: "🎯 Sứ mệnh", value: expression, meaning: meanings.expression},
-        {label: "🔗 Kết nối Đường đời- Sứ mệnh", value: conneclifeandexpression, meaning: meanings.conneclifeandexpression},
-        {label: "💖 Linh hồn", value: soulUrge, meaning: meanings.soulUrge},
-        {label: "😎 Nhân cách", value: personality, meaning: meanings.personality},
-        {label: "🔗 Kết nối Linh Hồn - Nhân Cách", value: soulPersonalityConnection, meaning: meanings.soulPersonalityConnection},
-        {label: "🌟 Trưởng thành", value: maturity, meaning: meanings.maturity},
-        {label: "📅 Ngày sinh", value: birthday, meaning: meanings.birthday},
-        {label: "⚖️ Số cân bằng", value: balance, meaning: meanings.balance},
-        {label: "🔥 Đam mê", value: passion, meaning: meanings.passion},
-        {label: "🏁 Chặng", value: `${stage1}, ${stage2}, ${stage3}, ${stage4}`, meaning: `${meanings.stage1}, ${meanings.stage2}, ${meanings.stage3}, ${meanings.stage4}`},
-        {label: "💪 Thách thức", value: `${challenge1}, ${challenge2}, ${challenge3}, ${challenge4}`, meaning: `${meanings.challenge1}, ${meanings.challenge2}, ${meanings.challenge3}, ${meanings.challenge4}`},
-        {label: "🗓️ Năm", value: yearNumber, meaning: meanings.yearNumber},
-        {label: "📆 Tháng", value: monthNumber, meaning: meanings.monthNumber},
-        {label: "📅 Ngày", value: dayNumber, meaning: meanings.dayNumber},
-        {label: "💎 Phi Vật Chất", value: Phivatchat, meaning: meanings.Phivatchat},
-        {label: "🏠 Vật Chất", value: vatchat, meaning: meanings.vatchat},
-        {label: "🛠️ Công cụ phương tiện", value: tools, meaning: meanings.tools},
-        {label: "⚖️ Nợ Nghiệp", value: debt, meaning: meanings.debt},
-        {label: "❌ Số thiếu", value: missingNumbers, meaning: meanings.missingNumbers},
-        {label: "🧠 Tư duy lý trí", value: intellectual, meaning: meanings.intellectual},
-        {label: "💭 Sức mạnh tiềm thức", value: subconscious, meaning: meanings.subconscious}
-      ].map((item, index) => `
-        <tr style="background:${index % 2 === 0 ? '#f0f4ff' : '#f9f9f9'}">
-          <th style="padding:10px; text-align:left; width:30%">${item.label}</th>
-          <td style="padding:10px;">
-            <strong>${item.value}</strong><br>
-            <small style="color:#555;">${item.meaning}</small>
-          </td>
-        </tr>
-      `).join('')}
-    </tbody>
+  <table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif; margin-top:15px;">
+    <tbody>${tableRows}</tbody>
   </table>
 `;
