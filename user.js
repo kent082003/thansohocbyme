@@ -932,9 +932,10 @@ window.generateResults = async function () {
     const birthday = calculateBirthDayNumber(day);
     const balance = calculateBalanceNumber(name);
     const passion = calculatePassionNumbers(name);
-  
-    const yearNumber = calculatePersonalYear(day, month, year);
-    const monthNumber = calculatePersonalMonth(month);
+  const currentYear = new Date().getFullYear();
+
+    const yearNumber = calculatePersonalYear(day, month, currentYear);
+    const monthNumber = calculatePersonalMonth(yearNumber);
     const dayNumber = calculatePersonalDay(day);
    const Phivatchat = Phivatchat_v1(day, month, year,name);
    const conneclifeandexpression = calculateConnectionNumber(lifePath,expression);
