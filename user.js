@@ -783,12 +783,11 @@ const saveBtn = document.getElementById("saveBtn");
 
 const loadBtn = document.getElementById("loadBtn");
 const resultBox = document.getElementById("resultBox");
-
 saveBtn.addEventListener("click", async () => {
-    const name = document.getElementById("name").value;
-    const day = document.getElementById("day").value;
-    const month = document.getElementById("month").value;
-    const year = document.getElementById("year").value;
+    const name = document.getElementById("name").value.trim();
+    const day = Number(document.getElementById("day").value);
+    const month = Number(document.getElementById("month").value);
+    const year = Number(document.getElementById("year").value);
 
     if (!name || !day || !month || !year) {
         alert("Vui lòng nhập đầy đủ thông tin!");
@@ -796,11 +795,26 @@ saveBtn.addEventListener("click", async () => {
     }
 
     try {
+        // 1️⃣ Lấy tất cả dữ liệu trong collection
+        const querySnapshot = await getDocs(collection(db, "users"));
+
+        // 2️⃣ Kiểm tra trùng
+        const exists = querySnapshot.docs.some(docItem => {
+            const d = docItem.data();
+            return d.name === name && d.day === day && d.month === month && d.year === year;
+        });
+
+        if (exists) {
+            alert("Dữ liệu này đã tồn tại. Không lưu trùng!");
+            return;
+        }
+
+        // 3️⃣ Nếu không trùng, lưu mới
         await addDoc(collection(db, "users"), {
             name: name,
-            day: Number(day),
-            month: Number(month),
-            year: Number(year),
+            day: day,
+            month: month,
+            year: year,
             createdAt: new Date()
         });
 
@@ -810,6 +824,7 @@ saveBtn.addEventListener("click", async () => {
         alert("Không thể lưu dữ liệu!");
     }
 });
+
 
 loadBtn.addEventListener("click", async () => {
     resultBox.innerHTML = "Đang tải dữ liệu...";
