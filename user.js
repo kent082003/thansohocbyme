@@ -1007,11 +1007,10 @@ document.getElementById('toggleMeaningBtn').addEventListener('click', () => {
     buildTable(); // gọi lại hàm tạo bảng
 });
 
-function generateResults() {
-   
-    buildTable();
-}
 
+document.getElementById('xuatbando').addEventListener('click', () => {
+       buildTable(); // gọi lại hàm tạo bảng
+});
 const dataRows = [
   {label:"🔢 Đường đời",value:lifePath,meaning:meanings.lifePath},
   {label:"🎯 Sứ mệnh",value:expression,meaning:meanings.expression},
