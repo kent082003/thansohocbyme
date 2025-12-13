@@ -1034,4 +1034,3 @@ const tableRows = dataRows.map((item, index) => `
 resultBox.style.display = "block";
 resultBox.innerHTML = `<table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif; margin-top:15px;"> <tbody>${tableRows}</tbody> </table>`;
    };
-      };
