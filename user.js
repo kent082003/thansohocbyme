@@ -781,6 +781,9 @@ function Congcuphuongtien(day, month, year, name) {
 
 const saveBtn = document.getElementById("saveBtn");
 
+const loadBtn = document.getElementById("loadBtn");
+const resultBox = document.getElementById("resultBox");
+
 saveBtn.addEventListener("click", async () => {
     const name = document.getElementById("name").value;
     const day = document.getElementById("day").value;
@@ -808,11 +811,6 @@ saveBtn.addEventListener("click", async () => {
     }
 });
 
-
-
-const loadBtn = document.getElementById("loadBtn");
-const resultBox = document.getElementById("resultBox");
-
 loadBtn.addEventListener("click", async () => {
     resultBox.innerHTML = "Đang tải dữ liệu...";
     resultBox.style.display = "block";
@@ -827,11 +825,11 @@ loadBtn.addEventListener("click", async () => {
 
         let html = "<h2>Danh sách người dùng đã lưu</h2>";
 
-        querySnapshot.forEach(doc => {
-            const data = doc.data();
-
+        querySnapshot.forEach(docItem => {
+            const data = docItem.data();
             html += `
-                <div style="padding:10px; margin-bottom:10px; background:#fff; border-radius:6px;">
+                <div class="user-item" data-id="${docItem.id}" 
+                     style="padding:10px; margin-bottom:10px; background:#fff; border-radius:6px; cursor:pointer;">
                     <strong>${data.name}</strong><br>
                     Ngày sinh: ${data.day}/${data.month}/${data.year}
                 </div>
@@ -840,43 +838,26 @@ loadBtn.addEventListener("click", async () => {
 
         resultBox.innerHTML = html;
 
+        // 🔹 Gắn sự kiện click sau khi HTML được thêm
+        document.querySelectorAll(".user-item").forEach(item => {
+            item.addEventListener("click", async () => {
+                const id = item.dataset.id;
+                const docSnap = await getDoc(doc(db, "users", id));
+                if (docSnap.exists()) {
+                    const d = docSnap.data();
+                    document.getElementById("name").value = d.name;
+                    document.getElementById("day").value = d.day;
+                    document.getElementById("month").value = d.month;
+                    document.getElementById("year").value = d.year;
+                    alert("Đã tải dữ liệu. Giờ bạn có thể tính lại!");
+                }
+            });
+        });
+
     } catch (err) {
         console.error("Error loading:", err);
         resultBox.innerHTML = "Lỗi khi tải dữ liệu!";
     }
-});
-
-querySnapshot.forEach(doc => {
-    const data = doc.data();
-
-    html += `
-        <div class="user-item" data-id="${doc.id}" 
-             style="padding:10px; margin-bottom:10px; background:#fff; border-radius:6px; cursor:pointer;">
-            <strong>${data.name}</strong><br>
-            Ngày sinh: ${data.day}/${data.month}/${data.year}
-        </div>
-    `;
-});
-document.querySelectorAll(".user-item").forEach(item => {
-    item.addEventListener("click", async () => {
-        const id = item.dataset.id;
-
-        // Load Firestore doc by ID
-        const docRef = doc(db, "users", id);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-            const d = docSnap.data();
-
-            // Put data back to form:
-            document.getElementById("name").value = d.name;
-            document.getElementById("day").value = d.day;
-            document.getElementById("month").value = d.month;
-            document.getElementById("year").value = d.year;
-
-            alert("Đã tải dữ liệu. Giờ bạn có thể tính lại!");
-        }
-    });
 });
 
 
