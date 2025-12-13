@@ -1007,12 +1007,8 @@ document.getElementById('toggleMeaningBtn').addEventListener('click', () => {
     buildTable(); // gọi lại hàm tạo bảng
 });
 
-let showMeaning = true; // trạng thái ban đầu: hiển thị cả value + meaning
 
-document.getElementById('toggleMeaningBtn').addEventListener('click', () => {
-    showMeaning = !showMeaning; // đổi trạng thái
-    buildTable(); // gọi lại hàm tạo bảng
-});
+
 const dataRows = [
   {label:"🔢 Đường đời",value:lifePath,meaning:meanings.lifePath},
   {label:"🎯 Sứ mệnh",value:expression,meaning:meanings.expression},
