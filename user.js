@@ -520,6 +520,10 @@ function reduceToSingleDigit(num) {
 
 
 function calculatePersonalYear(day, month, year) {
+
+	 	console.log("day:", day);
+		 	console.log("month:", month);
+			 	console.log("year:", year);
   // Reduce day, month, and year to single digits (except for master numbers 11, 22, 33)
   const reducedDay = reduceToSingleDigit(day);
   const reducedMonth = reduceToSingleDigit(month);
@@ -530,7 +534,7 @@ function calculatePersonalYear(day, month, year) {
 
   // Final reduction of the Personal Year Number (except for master numbers 11, 22, 33)
   let finalPersonalYear = reduceToSingleDigit(personalYear);
-
+	console.log("finalPersonalYear:", finalPersonalYear);
   return finalPersonalYear;
 }
 
