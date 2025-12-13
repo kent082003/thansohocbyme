@@ -1001,10 +1001,11 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
 	   //   
  // 👉 Format: VALUE giữ 1 dòng, MEANING mỗi ý nghĩa 1 dòng
 function formatMeaningEachLine(text) {
-  if (!text) return '';
+  if (text == null) return '';   // null hoặc undefined
+  text = String(text);           // ép kiểu sang string
 
   return text
-    .split(/\n|,/)
+    .split(/\n|,/)               // tách theo xuống dòng hoặc dấu phẩy
     .map(t => t.trim())
     .filter(t => t)
     .map(t => `• ${t}`)
