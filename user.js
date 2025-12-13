@@ -1032,8 +1032,6 @@ const tableRows = dataRows.map((item, index) => `
 
 // 3️⃣ Gán vào resultBox
 resultBox.style.display = "block";
-resultBox.innerHTML = `
-  <table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif; margin-top:15px;">
-    <tbody>${tableRows}</tbody>
-  </table>
-`;
+resultBox.innerHTML = `<table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif; margin-top:15px;"> <tbody>${tableRows}</tbody> </table>`;
+   };
+      };
