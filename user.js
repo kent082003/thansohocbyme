@@ -1000,56 +1000,62 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
     // --- Hiển thị kết quả ---
 	   //   
  
-// 1️⃣ Prepare data array
 const dataRows = [
-  {label: "🔢 Đường đời", value: lifePath, meaning: meanings.lifePath},
-  {label: "🎯 Sứ mệnh", value: expression, meaning: meanings.expression},
-  {label: "🔗 Kết nối Đường đời- Sứ mệnh", value: conneclifeandexpression, meaning: meanings.conneclifeandexpression},
-  {label: "💖 Linh hồn", value: soulUrge, meaning: meanings.soulUrge},
-  {label: "😎 Nhân cách", value: personality, meaning: meanings.personality},
-  {label: "🔗 Kết nối Linh Hồn - Nhân Cách", value: soulPersonalityConnection, meaning: meanings.soulPersonalityConnection},
-  {label: "🌟 Trưởng thành", value: maturity, meaning: meanings.maturity},
-  {label: "📅 Ngày sinh", value: birthday, meaning: meanings.birthday},
-  {label: "⚖️ Số cân bằng", value: balance, meaning: meanings.balance},
-  {label: "🔥 Đam mê", value: passion, meaning: meanings.passion},
-  {label: "🏁 Chặng", value: `${stage1}, ${stage2}, ${stage3}, ${stage4}`, meaning: `${meanings.stage1},${meanings.stage2},${meanings.stage3},${meanings.stage4}`},
-  {label: "💪 Thách thức", value: `${challenge1},${challenge2},${challenge3},${challenge4}`, meaning: `${meanings.challenge1},${meanings.challenge2},${meanings.challenge3},${meanings.challenge4}`},
-  {label: "🗓️ Năm", value: yearNumber, meaning: meanings.yearNumber},
-  {label: "📆 Tháng", value: monthNumber, meaning: meanings.monthNumber},
-  {label: "📅 Ngày", value: dayNumber, meaning: meanings.dayNumber},
-  {label: "💎 Phi Vật Chất", value: Phivatchat, meaning: meanings.Phivatchat},
-  {label: "🏠 Vật Chất", value: vatchat, meaning: meanings.vatchat},
-  {label: "🛠️ Công cụ phương tiện", value: tools, meaning: meanings.tools},
-  {label: "⚖️ Nợ Nghiệp", value: debt, meaning: meanings.debt},
-  {label: "❌ Số thiếu", value: missingNumbers, meaning: meanings.missingNumbers},
-  {label: "🧠 Tư duy lý trí", value: intellectual, meaning: meanings.intellectual},
-  {label: "💭 Sức mạnh tiềm thức", value: subconscious, meaning: meanings.subconscious}
+  {label:"🔢 Đường đời",value:lifePath,meaning:meanings.lifePath},
+  {label:"🎯 Sứ mệnh",value:expression,meaning:meanings.expression},
+  {label:"🔗 Kết nối Đường đời- Sứ mệnh",value:conneclifeandexpression,meaning:meanings.conneclifeandexpression},
+  {label:"💖 Linh hồn",value:soulUrge,meaning:meanings.soulUrge},
+  {label:"😎 Nhân cách",value:personality,meaning:meanings.personality},
+  {label:"🔗 Kết nối Linh Hồn - Nhân Cách",value:soulPersonalityConnection,meaning:meanings.soulPersonalityConnection},
+  {label:"🌟 Trưởng thành",value:maturity,meaning:meanings.maturity},
+  {label:"📅 Ngày sinh",value:birthday,meaning:meanings.birthday},
+  {label:"⚖️ Số cân bằng",value:balance,meaning:meanings.balance},
+  {label:"🔥 Đam mê",value:passion,meaning:meanings.passion},
+  {label:"🏁 Chặng",value:`${stage1}, ${stage2}, ${stage3}, ${stage4}`,meaning:`${meanings.stage1}, ${meanings.stage2}, ${meanings.stage3}, ${meanings.stage4}`},
+  {label:"💪 Thách thức",value:`${challenge1}, ${challenge2}, ${challenge3}, ${challenge4}`,meaning:`${meanings.challenge1}, ${meanings.challenge2}, ${meanings.challenge3}, ${meanings.challenge4}`},
+  {label:"🗓️ Năm",value:yearNumber,meaning:meanings.yearNumber},
+  {label:"📆 Tháng",value:monthNumber,meaning:meanings.monthNumber},
+  {label:"📅 Ngày",value:dayNumber,meaning:meanings.dayNumber},
+  {label:"💎 Phi Vật Chất",value:Phivatchat,meaning:meanings.Phivatchat},
+  {label:"🏠 Vật Chất",value:vatchat,meaning:meanings.vatchat},
+  {label:"🛠️ Công cụ phương tiện",value:tools,meaning:meanings.tools},
+  {label:"⚖️ Nợ Nghiệp",value:debt,meaning:meanings.debt},
+  {label:"❌ Số thiếu",value:missingNumbers,meaning:meanings.missingNumbers},
+  {label:"🧠 Tư duy lý trí",value:intellectual,meaning:meanings.intellectual},
+  {label:"💭 Sức mạnh tiềm thức",value:subconscious,meaning:meanings.subconscious}
 ];
 
-// 2️⃣ Build table rows with 3 columns per row
-let tableHtml = '<table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif;">';
+// 2️⃣ Build table
+let tableHtml = '<table style="width:100%;border-collapse:collapse;font-family:Arial;">';
 
 for (let i = 0; i < dataRows.length; i += 3) {
-    tableHtml += '<tr>';
-    for (let j = 0; j < 3; j++) {
-        const item = dataRows[i + j];
-        if (item) {
-            tableHtml += `
-                <td style="padding:10px; vertical-align:top; border:1px solid #ddd; background:${(i+j)%2===0 ? '#f0f4ff' : '#fff'}; width:33%;">
-                    <strong>${item.label}</strong><br>
-                    <span style="color:#555;">${item.value ?? '-'}<br>${item.meaning ?? ''}</span>
-                </td>
-            `;
-        } else {
-            tableHtml += `<td style="padding:10px; border:1px solid #ddd; background:#fff;"></td>`;
-        }
+  tableHtml += '<tr>';
+
+  for (let j = 0; j < 3; j++) {
+    const item = dataRows[i + j];
+
+    if (item) {
+      tableHtml += `
+      <td style="padding:12px;border:1px solid #ddd;vertical-align:top;background:${(i+j)%2===0?'#f0f4ff':'#fff'};width:33%;">
+        <div style="font-weight:bold;margin-bottom:4px;">${item.label}</div>
+        <div style="font-size:26px;font-weight:700;color:#d60000;margin-bottom:4px;">
+          ${item.value ?? '-'}
+        </div>
+        <div style="font-size:13px;color:#555;line-height:1.4;">
+          ${item.meaning ?? ''}
+        </div>
+      </td>`;
+    } else {
+      tableHtml += '<td></td>';
     }
-    tableHtml += '</tr>';
+  }
+
+  tableHtml += '</tr>';
 }
 
 tableHtml += '</table>';
 
-// 3️⃣ Show table in resultBox
+// 3️⃣ Render
 const resultBox = document.getElementById("resultBox");
 resultBox.style.display = "block";
 resultBox.innerHTML = tableHtml;
