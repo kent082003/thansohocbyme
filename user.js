@@ -51,14 +51,16 @@ function calculateLifePathNumber(day, month, year) {
 }
 function calculateLifePathNumberNoSum(day, month, year) {
   // Convert day, month, and year into individual digits
-  const digits = (day + month + year).toString().split('').map(Number);
+    // Reduce day, month, and year to single digits (except for master numbers 11, 22, 33)
+  const reducedDay = reduceToSingleDigit(day);
+  const reducedMonth = reduceToSingleDigit(month);
+  const reducedYear = reduceToSingleDigit(year);
 
-  // Sum the digits
-  let sum = digits.reduce((acc, num) => acc + num, 0);
+  // Calculate Personal Year Number
+  const personalYear = reducedDay + reducedMonth + reducedYear;
 
-  // Reduce to a single digit or master number (11, 22, 33) 
 
-  return sum;
+  return personalYear;
 }
 function calculateExpressionNumberByWord(name) {
 	console.log("NAME BEFORE ALL CALCULATIONS:", name);
@@ -526,9 +528,7 @@ function calculatePersonalYear(day, month, year) {
   const reducedDay = reduceToSingleDigit(day);
   const reducedMonth = reduceToSingleDigit(month);
   const reducedYear = reduceToSingleDigit(year);
-console.log("day:", reducedDay);
-		 	console.log("month:", reducedMonth);
-			 	console.log("year:", reducedYear);
+
   // Calculate Personal Year Number
   const personalYear = reducedDay + reducedMonth + reducedYear;
 
