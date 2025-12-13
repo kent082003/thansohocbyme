@@ -993,44 +993,34 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
 	   //   
  
 	 // 
-// 1️⃣ Tạo array dữ liệu
-const dataRows = [
-  {label: "🔢 Đường đời", value: lifePath, meaning: meanings.lifePath},
-  {label: "🎯 Sứ mệnh", value: expression, meaning: meanings.expression},
-  {label: "🔗 Kết nối Đường đời- Sứ mệnh", value: conneclifeandexpression, meaning: meanings.conneclifeandexpression},
-  {label: "💖 Linh hồn", value: soulUrge, meaning: meanings.soulUrge},
-  {label: "😎 Nhân cách", value: personality, meaning: meanings.personality},
-  {label: "🔗 Kết nối Linh Hồn - Nhân Cách", value: soulPersonalityConnection, meaning: meanings.soulPersonalityConnection},
-  {label: "🌟 Trưởng thành", value: maturity, meaning: meanings.maturity},
-  {label: "📅 Ngày sinh", value: birthday, meaning: meanings.birthday},
-  {label: "⚖️ Số cân bằng", value: balance, meaning: meanings.balance},
-  {label: "🔥 Đam mê", value: passion, meaning: meanings.passion},
-  {label: "🏁 Chặng", value: `${stage1}, ${stage2}, ${stage3}, ${stage4}`, meaning: `${meanings.stage1}, ${meanings.stage2}, ${meanings.stage3}, ${meanings.stage4}`},
-  {label: "💪 Thách thức", value: `${challenge1}, ${challenge2}, ${challenge3}, ${challenge4}`, meaning: `${meanings.challenge1}, ${meanings.challenge2}, ${meanings.challenge3}, ${meanings.challenge4}`},
-  {label: "🗓️ Năm", value: yearNumber, meaning: meanings.yearNumber},
-  {label: "📆 Tháng", value: monthNumber, meaning: meanings.monthNumber},
-  {label: "📅 Ngày", value: dayNumber, meaning: meanings.dayNumber},
-  {label: "💎 Phi Vật Chất", value: Phivatchat, meaning: meanings.Phivatchat},
-  {label: "🏠 Vật Chất", value: vatchat, meaning: meanings.vatchat},
-  {label: "🛠️ Công cụ phương tiện", value: tools, meaning: meanings.tools},
-  {label: "⚖️ Nợ Nghiệp", value: debt, meaning: meanings.debt},
-  {label: "❌ Số thiếu", value: missingNumbers, meaning: meanings.missingNumbers},
-  {label: "🧠 Tư duy lý trí", value: intellectual, meaning: meanings.intellectual},
-  {label: "💭 Sức mạnh tiềm thức", value: subconscious, meaning: meanings.subconscious}
-];
+    const resultBox = document.getElementById("resultBox");
+    resultBox.style.display = "block";
+    resultBox.innerHTML = `
+        <h3>🔢 Đường đời: ${lifePath}</h3><p>${meanings.lifePath}</p>
+        <h3>🎯 Sứ mệnh: ${expression}</h3><p>${meanings.expression}</p>
+		 <h3>🔗 Kết nối Đường đời- Sứ mệnh: ${conneclifeandexpression}</h3><p>${meanings.conneclifeandexpression}</p>
+        <h3>💖 Linh hồn: ${soulUrge}</h3><p>${meanings.soulUrge}</p>
+        <h3>😎 Nhân cách: ${personality}</h3><p>${meanings.personality}</p>       
+  <h3>🔗 Kết nối Linh Hồn - Nhân Cách: ${soulPersonalityConnection}</h3><p>${meanings.soulPersonalityConnection}</p>
+		 <h3>🌟 Trưởng thành: ${maturity}</h3><p>${meanings.maturity}</p>
+        <h3>📅 Ngày sinh: ${birthday}</h3><p>${meanings.birthday}</p>
+        <h3>⚖️ Số cân bằng: ${balance}</h3><p>${meanings.balance}</p>
+        <h3>🔥 Đam mê: ${passion}</h3><p>${meanings.passion}</p>
+        <h3>🏁 Chặng: ${stage1}, ${stage2}, ${stage3}, ${stage4}</h3><p>${meanings.stage1},${meanings.stage2},${meanings.stage3},${meanings.stage4}</p>
+        <h3>💪 Thách thức: ${challenge1},${challenge2},${challenge3},${challenge4}</h3><p>${meanings.challenge1},${meanings.challenge2},${meanings.challenge3},${meanings.challenge4}</p>
+        <h3>🗓️ Năm: ${yearNumber}</h3><p>${meanings.yearNumber}</p>
+        <h3>📆 Tháng: ${monthNumber}</h3><p>${meanings.monthNumber}</p>
+        <h3>📅 Ngày: ${dayNumber}</h3><p>${meanings.dayNumber}</p>
+  <h3>💎 Phi Vật Chất: ${Phivatchat}</h3><p>${meanings.Phivatchat}</p>
+              <h3>🏠 Vật Chất: ${vatchat}</h3><p>${meanings.vatchat}</p>
+        <h3>🛠️ Công cụ phương tiện: ${tools}</h3><p>${meanings.tools}</p>
+		<h3>⚖️ Nợ Nghiệp: ${debt}</h3><p>${meanings.debt}</p>
+        <h3>❌ Số thiếu: ${missingNumbers}</h3><p>${meanings.missingNumbers}</p>
+        <h3>🧠 Tư duy lý trí: ${intellectual}</h3><p>${meanings.intellectual}</p>
+        <h3>💭 Sức mạnh tiềm thức: ${subconscious}</h3><p>${meanings.subconscious}</p>
+      
+    `;
+};
 
-// 2️⃣ Tạo HTML cho bảng
-const tableRows = dataRows.map((item, index) => `
-  <tr style="background:${index % 2 === 0 ? '#f0f4ff' : '#f9f9f9'}">
-    <th style="padding:10px; text-align:left; width:30%">${item.label}</th>
-    <td style="padding:10px;">
-      <strong>${item.value ?? '-'}</strong><br>
-      <small style="color:#555;">${item.meaning ?? '-'}</small>
-    </td>
-  </tr>
-`).join('');
 
-// 3️⃣ Gán vào resultBox
-resultBox.style.display = "block";
-resultBox.innerHTML = `<table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif; margin-top:15px;"> <tbody>${tableRows}</tbody> </table>`;
-   };
+});
