@@ -824,11 +824,10 @@ saveBtn.addEventListener("click", async () => {
         alert("Không thể lưu dữ liệu!");
     }
 });
-
-// Load danh sách user
+// Load danh sách và hiển thị table
 loadBtn.addEventListener("click", async () => {
-    resultBox.innerHTML = "Đang tải dữ liệu...";
     resultBox.style.display = "block";
+    resultBox.innerHTML = "Đang tải dữ liệu...";
 
     try {
         const querySnapshot = await getDocs(collection(db, "users"));
@@ -838,68 +837,63 @@ loadBtn.addEventListener("click", async () => {
             return;
         }
 
-        let html = "<h2>Danh sách người dùng đã lưu</h2>";
+        let html = `
+        <table>
+            <thead>
+                <tr>
+                    <th>Tên</th>
+                    <th>Ngày sinh</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+        `;
 
         querySnapshot.forEach(docItem => {
             const data = docItem.data();
             html += `
-                <div class="user-item" data-id="${docItem.id}" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="user-info" style="cursor:pointer;">
-                        <strong>${data.name}</strong><br>
-                        Ngày sinh: ${data.day}/${data.month}/${data.year}
-                    </div>
-                    <button class="delete-btn" data-id="${docItem.id}" style="margin-left:10px;">Xóa</button>
-                </div>
+                <tr data-id="${docItem.id}">
+                    <td class="user-info">${data.name}</td>
+                    <td>${data.day}/${data.month}/${data.year}</td>
+                    <td><button class="delete-btn" data-id="${docItem.id}">Xóa</button></td>
+                </tr>
             `;
         });
 
+        html += `</tbody></table>`;
         resultBox.innerHTML = html;
 
-        // Click vào user-info để load vào form
+        // Click vào tên để load vào form
         document.querySelectorAll(".user-info").forEach(item => {
             item.addEventListener("click", async () => {
                 const id = item.parentElement.dataset.id;
-                try {
-                    const docSnap = await getDoc(doc(db, "users", id));
-                    if (docSnap.exists()) {
-                        const d = docSnap.data();
-                        document.getElementById("name").value = d.name;
-                        document.getElementById("day").value = d.day;
-                        document.getElementById("month").value = d.month;
-                        document.getElementById("year").value = d.year;
-                        alert("Đã tải dữ liệu vào form!");
-                    }
-                } catch (err) {
-                    console.error("Lỗi khi load user:", err);
-                    alert("Không thể tải dữ liệu.");
+                const docSnap = await getDoc(doc(db, "users", id));
+                if (docSnap.exists()) {
+                    const d = docSnap.data();
+                    document.getElementById("name").value = d.name;
+                    document.getElementById("day").value = d.day;
+                    document.getElementById("month").value = d.month;
+                    document.getElementById("year").value = d.year;
                 }
             });
         });
 
-        // Xử lý nút delete
+        // Xử lý nút Delete
         document.querySelectorAll(".delete-btn").forEach(btn => {
             btn.addEventListener("click", async () => {
                 const id = btn.dataset.id;
                 if (confirm("Bạn có chắc muốn xóa dữ liệu này?")) {
-                    try {
-                        await deleteDoc(doc(db, "users", id));
-                        alert("Đã xóa dữ liệu!");
-                        loadBtn.click(); // reload danh sách sau khi xóa
-                    } catch (err) {
-                        console.error("Lỗi khi xóa:", err);
-                        alert("Không thể xóa dữ liệu!");
-                    }
+                    await deleteDoc(doc(db, "users", id));
+                    alert("Đã xóa dữ liệu!");
+                    loadBtn.click();
                 }
             });
         });
 
     } catch (err) {
-        console.error("Error loading:", err);
+        console.error("Lỗi khi tải dữ liệu:", err);
         resultBox.innerHTML = "Lỗi khi tải dữ liệu!";
     }
-});
-
-
 // -----------------------
 // Hàm hiển thị kết quả
 // -----------------------
