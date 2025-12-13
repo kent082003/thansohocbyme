@@ -57,3 +57,25 @@ window.nextNumber = function () {
     meaningText.style.background = "#fff";
     status.innerText = "";
 };
+window.saveBulk = async function () {
+    const bulkInput = document.getElementById('bulkInput').value.trim();
+    const lines = bulkInput.split('\n');
+    let count = 0;
+
+    for (const line of lines) {
+        const parts = line.split('|');
+        if (parts.length !== 2) continue;
+
+        const num = parts[0].trim();
+        const text = parts[1].trim();
+        const type = document.getElementById('typeSelect').value;
+
+        if (!num || !text) continue;
+
+        await setDoc(doc(db, "numerology", `${type}_${num}`), { text });
+        count++;
+    }
+
+    document.getElementById('bulkStatus').innerText = `Đã lưu ${count} bản ghi!`;
+    document.getElementById('bulkInput').value = '';
+};

@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8" />
-<title>Admin - Numerology CMS</title>
+<title>Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 
@@ -90,6 +90,10 @@ onAuthStateChanged(auth, (user) => {
 		<button onclick="meaningText.value=''">🧹 Clear</button>
         <button onclick="logout()">Logout</button>
 <button onclick="nextNumber()">Next ⏭️</button>
+<h3>Nhập nhanh nhiều số (mỗi dòng: số|nội dung)</h3>
+<textarea id="bulkInput" placeholder="1|Nội dung số 1\n2|Nội dung số 2"></textarea>
+<button onclick="saveBulk()">💾 Save Bulk</button>
+<p id="bulkStatus"></p>
 
         <p id="status" style="font-weight:bold;color:green;"></p>
     </div>
