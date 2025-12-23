@@ -299,12 +299,12 @@ function reduceToSingleDigitConnectionNumber(num) {
 }
 function calculateConnectionNumber(lifePath, expressionNumber) {
   // Force reduce ONLY here
-  const lp = reduceToSingleDigit(lifePath);        // 11 → 1, 22 → 4, 33 → 6
-  const en = reduceToSingleDigit(expressionNumber);
+  const lp = reduceToSingleDigitConnectionNumber(lifePath);        // 11 → 1, 22 → 4, 33 → 6
+  const en = reduceToSingleDigitConnectionNumber(expressionNumber);
 
   let result = Math.abs(lp - en);
 
-  result = reduceToSingleDigit(result);
+  result = reduceToSingleDigitConnectionNumber(result);
 
   return result;
 }
@@ -324,12 +324,12 @@ function calculateBirthDayNumber(day) {
 
 function calculateSoulPersonalityConnection(soulUrgeNumber, personalityNumber)  {
   // Force reduce ONLY here
-  const lp = reduceToSingleDigit(soulUrgeNumber);        // 11 → 1, 22 → 4, 33 → 6
-  const en = reduceToSingleDigit(personalityNumber);
+  const lp = reduceToSingleDigitConnectionNumber(soulUrgeNumber);        // 11 → 1, 22 → 4, 33 → 6
+  const en = reduceToSingleDigitConnectionNumber(personalityNumber);
 
   let result = Math.abs(lp - en);
 
-  result = reduceToSingleDigit(result);
+  result = reduceToSingleDigitConnectionNumber(result);
 
   return result;
 }
