@@ -36,19 +36,28 @@ function reduceToSingleDigitGeneral(num) {
 // calculateLifePathNumber, calculateExpressionNumberByWord, calculateDestinyNumber, etc.
 // -----------------------
 function calculateLifePathNumber(day, month, year) {
-  // Convert day, month, and year into individual digits
-  const digits = (day + month + year).toString().split('').map(Number);
-
-  // Sum the digits
-  let sum = digits.reduce((acc, num) => acc + num, 0);
-
-  // Reduce to a single digit or master number (11, 22, 33)
-  while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
-    sum = sum.toString().split('').map(Number).reduce((acc, num) => acc + num, 0);
+ function reduce(num) {
+    while (num > 9 && num !== 11 && num !== 22 && num !== 33) {
+      num = num
+        .toString()
+        .split('')
+        .map(Number)
+        .reduce((sum, n) => sum + n, 0);
+    }
+    return num;
   }
 
-  return sum;
+  const dayNumber = reduce(day);
+  const monthNumber = reduce(month);
+  const yearNumber = reduce(year);
+
+  let total = dayNumber + monthNumber + yearNumber;
+
+  total = reduce(total);
+
+  return total;
 }
+
 function calculateLifePathNumberNoSum(day, month, year) {
   // Convert day, month, and year into individual digits
     // Reduce day, month, and year to single digits (except for master numbers 11, 22, 33)
