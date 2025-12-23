@@ -320,17 +320,20 @@ function calculateBirthDayNumber(day) {
   return sum;
 }
 
-function calculateSoulPersonalityConnection(soulUrgeNumber, personalityNumber) {
-  const connectionNumber = Math.abs(reduceToSingleDigit(soulUrgeNumber) - reduceToSingleDigit(personalityNumber));
 
-  // Reduce to a single digit or master number (11, 22, 33)
-  let result = connectionNumber;
-  while (result > 9 && result !== 11 && result !== 22 && result !== 33) {
-    result = result.toString().split('').map(Number).reduce((acc, num) => acc + num, 0);
-  }
+
+function calculateSoulPersonalityConnection(soulUrgeNumber, personalityNumber)  {
+  // Force reduce ONLY here
+  const lp = reduceToSingleDigit(soulUrgeNumber);        // 11 → 1, 22 → 4, 33 → 6
+  const en = reduceToSingleDigit(personalityNumber);
+
+  let result = Math.abs(lp - en);
+
+  result = reduceToSingleDigit(result);
 
   return result;
 }
+
 function calculateMissingNumbers(name) {
   const letterToNumber = {
     'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9,
