@@ -287,17 +287,28 @@ function calculateBalanceNumber(name) {
 
   return balanceNumber;
 }
-function calculateConnectionNumber(lifePath, expressionNumber) {
-  const connectionNumber = Math.abs(reduceToSingleDigit(lifePath) - reduceToSingleDigit(expressionNumber));
-  
-  // Reduce to a single digit or master number (11, 22, 33)
-  let result = connectionNumber;
-  while (result > 9 && result !== 11 && result !== 22 && result !== 33) {
-    result = result.toString().split('').map(Number).reduce((acc, num) => acc + num, 0);
+function reduceToSingleDigitConnectionNumber(num) {
+  while (num > 9) {
+    num = num
+      .toString()
+      .split('')
+      .map(Number)
+      .reduce((sum, n) => sum + n, 0);
   }
+  return num;
+}
+function calculateConnectionNumber(lifePath, expressionNumber) {
+  // Force reduce ONLY here
+  const lp = reduceToSingleDigit(lifePath);        // 11 → 1, 22 → 4, 33 → 6
+  const en = reduceToSingleDigit(expressionNumber);
+
+  let result = Math.abs(lp - en);
+
+  result = reduceToSingleDigit(result);
 
   return result;
 }
+
 function calculateBirthDayNumber(day) {
   let sum = day;
 
