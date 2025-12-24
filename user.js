@@ -1071,12 +1071,20 @@ for (let i = 0; i < dataRows.length; i += 3) {
       tableHtml += `
       <td style="padding:12px;border:1px solid #ddd;vertical-align:top;background:${(i+j)%2===0?'#f0f4ff':'#fff'};width:33%;">
         <div style="font-weight:bold;margin-bottom:4px;">${item.label}</div>
-        <div style="font-size:26px;font-weight:700;color:#d60000;margin-bottom:4px;">
-          ${item.value ?? '-'}
-        </div>
-        <div style="font-size:13px;color:#555;line-height:1.4;">
-          ${item.meaning ?? ''}
-        </div>
+       <div 
+  style="font-size:26px;font-weight:700;color:#d60000;margin-bottom:4px;cursor:pointer;"
+  onclick="toggleMeaning('meaning-${i+j}')"
+>
+  ${item.value ?? '-'}
+</div>
+
+<div 
+  id="meaning-${i+j}"
+  style="display:none;font-size:13px;color:#555;line-height:1.5;margin-top:6px;"
+>
+  ${formatMeaningEachLine(item.meaning)}
+</div>
+
       </td>`;
     } else {
       tableHtml += '<td></td>';
@@ -1097,3 +1105,19 @@ resultBox.innerHTML = tableHtml;
 
 
 });
+let currentMeaningOpen = null;
+
+function toggleMeaning(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  // Đóng ô đang mở
+  if (currentMeaningOpen && currentMeaningOpen !== el) {
+    currentMeaningOpen.style.display = "none";
+  }
+
+  // Toggle ô hiện tại
+  el.style.display = el.style.display === "none" ? "block" : "none";
+  currentMeaningOpen = el.style.display === "block" ? el : null;
+}
+
