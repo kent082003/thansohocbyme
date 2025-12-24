@@ -1013,11 +1013,14 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
  tools : await loadMeaningSafe("cong_cu_phuong_tien", tools),
  
         debt: await loadMeaningSafe("no_nghiep", debt),
-		  conneclifeandexpression: await loadMeaningSafe("ket_noi_duong_doi_su_menh", conneclifeandexpression),
+		 conneclifeandexpression: await loadMeaning("ket_noi_duongdoi_sumenh", conneclifeandexpression),
         missingNumbers: await loadMeaning("so_thieu", missingNumbers),
         intellectual: await loadMeaning("tu_duy_ly_tri", intellectual),
         subconscious: await loadMeaning("suc_manh_tiem_thuc", subconscious),
-        soulPersonalityConnection: await loadMeaning("ket_noi_linh_hon_nhan_cach", soulPersonalityConnection)
+        soulPersonalityConnection: await loadMeaning("ket_noi_linhhon_nhancach", soulPersonalityConnection)
+		
+
+	
     };
 
     // --- Hiển thị kết quả ---
