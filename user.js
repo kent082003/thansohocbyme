@@ -1101,21 +1101,17 @@ const resultBox = document.getElementById("resultBox");
 resultBox.style.display = "block";
 resultBox.innerHTML = tableHtml;
 
-let currentMeaningOpen = null;
-
-function toggleMeaning(id) {
+};
+window.toggleMeaning = function (id) {
   const el = document.getElementById(id);
   if (!el) return;
 
-  // Đóng ô đang mở
-  if (currentMeaningOpen && currentMeaningOpen !== el) {
-    currentMeaningOpen.style.display = "none";
+  if (window.currentMeaningOpen && window.currentMeaningOpen !== el) {
+    window.currentMeaningOpen.style.display = "none";
   }
 
-  // Toggle ô hiện tại
   el.style.display = el.style.display === "none" ? "block" : "none";
-  currentMeaningOpen = el.style.display === "block" ? el : null;
-}
+  window.currentMeaningOpen = el.style.display === "block" ? el : null;
 };
 
 
