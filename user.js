@@ -990,14 +990,11 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         connection: await loadMeaning("ket_noi", connection),
         birthday: await loadMeaning("ngay_sinh", birthday),
         balance: await loadMeaning("can_bang", balance),
-        passion: await loadMeaning("dam_me", passion),
-     
-				
-
-		stage1: await loadMeaning("chang", stage1),
-		stage2: await loadMeaning("chang", stage2),
-		stage3: await loadMeaning("chang", stage3),
-		stage4: await loadMeaning("chang", stage4),
+        passion: await loadMeaning("dam_me", passion),     			
+		stage1: await loadMeaning("Chặng", stage1),
+		stage2: await loadMeaning("Chặng", stage2),
+		stage3: await loadMeaning("Chặng", stage3),
+		stage4: await loadMeaning("Chặng", stage4),
 		challenge1: await loadMeaning("thach_thuc", challenge1),
 		challenge2: await loadMeaning("thach_thuc", challenge2),
 		challenge3: await loadMeaning("thach_thuc", challenge3),
