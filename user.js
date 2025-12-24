@@ -1101,10 +1101,6 @@ const resultBox = document.getElementById("resultBox");
 resultBox.style.display = "block";
 resultBox.innerHTML = tableHtml;
 
-};
-
-
-});
 let currentMeaningOpen = null;
 
 function toggleMeaning(id) {
@@ -1120,4 +1116,9 @@ function toggleMeaning(id) {
   el.style.display = el.style.display === "none" ? "block" : "none";
   currentMeaningOpen = el.style.display === "block" ? el : null;
 }
+};
+
+
+});
+
 
