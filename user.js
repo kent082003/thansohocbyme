@@ -971,9 +971,8 @@ window.generateResults = async function () {
      const vatchat = Vatchat_v1(day, month, year,name);
 
     const tools = Congcuphuongtien(day, month, year,name);
-	    const { challenge1, challenge2, challenge3, challenge4 } = calculateChallengeNumbers(day, month, year);
-
-const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year);
+	const { challenge1, challenge2, challenge3, challenge4 } = calculateChallengeNumbers(day, month, year);
+	const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year);
     const debt = checkForKarmicDebtNumbers(day, month, year,name);
     const missingNumbers = calculateMissingNumbers(name);
     const intellectual = calculateRationalThinkingNumber(name,day);
@@ -991,10 +990,10 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
         birthday: await loadMeaning("ngay_sinh", birthday),
         balance: await loadMeaning("can_bang", balance),
         passion: await loadMeaning("dam_me", passion),     			
-		stage1: await loadMeaning("Chặng", stage1),
-		stage2: await loadMeaning("Chặng", stage2),
-		stage3: await loadMeaning("Chặng", stage3),
-		stage4: await loadMeaning("Chặng", stage4),
+		stage1: await loadMeaning("Chang", stage1),
+		stage2: await loadMeaning("Chang", stage2),
+		stage3: await loadMeaning("Chang", stage3),
+		stage4: await loadMeaning("Chang", stage4),
 		challenge1: await loadMeaning("thach_thuc", challenge1),
 		challenge2: await loadMeaning("thach_thuc", challenge2),
 		challenge3: await loadMeaning("thach_thuc", challenge3),
@@ -1011,7 +1010,7 @@ const { stage1, stage2, stage3, stage4 } = calculateLifeStages(day, month, year)
  
         debt: await loadMeaningSafe("no_nghiep", debt),
 		 conneclifeandexpression: await loadMeaning("ket_noi_duongdoi_sumenh", conneclifeandexpression),
-        missingNumbers: await loadMeaning("so_thieu", missingNumbers),
+        missingNumbers: await loadMeaningSafe("so_thieu", missingNumbers),
         intellectual: await loadMeaning("tu_duy_ly_tri", intellectual),
         subconscious: await loadMeaning("suc_manh_tiem_thuc", subconscious),
         soulPersonalityConnection: await loadMeaning("ket_noi_linhhon_nhancach", soulPersonalityConnection)
