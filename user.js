@@ -1082,7 +1082,7 @@ for (let i = 0; i < dataRows.length; i += 3) {
   id="meaning-${i+j}"
   style="display:none;font-size:13px;color:#555;line-height:1.5;margin-top:6px;"
 >
-  ${formatMeaningEachLine(item.meaning)}
+  ${item.meaning}
 </div>
 
       </td>`;
