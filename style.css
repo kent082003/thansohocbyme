@@ -104,45 +104,4 @@ tr:hover {
         padding: 10px;
     }
 	
-	.lo-shu-wrapper {
-  position: relative;
-  width: 240px;
-  margin: 20px auto;
-}
-table.lo-shu {
-  width: 100%;
-  height: 240px;
-  border-collapse: collapse;
-}
-table.lo-shu td {
-  border: 2px solid #000;
-  width: 33.33%;
-  height: 80px;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 22px;
-  font-weight: bold;
-  user-select: none;
-}
-
-.arrow {
-  position: absolute;
-  background: red;
-  display: none;
-  pointer-events: none;
-  border-radius: 2px;
-}
-.arrow-456 {
-  top: 120px;
-  left: 10px;
-  width: 220px;
-  height: 4px;
-}
-.arrow-159 {
-  top: 200px;
-  left: 20px;
-  width: 200px;
-  height: 4px;
-  transform: rotate(-45deg);
-  transform-origin: left center;
-}
+	
