@@ -942,8 +942,9 @@ window.generateResults = async function () {
     const day = parseInt(document.getElementById("day").value);
     const month = parseInt(document.getElementById("month").value);
     const year = parseInt(document.getElementById("year").value);
+	const digits = (String(day).padStart(2,'0') + String(month).padStart(2,'0') + String(year))
+               .split("").filter(d => d !== "0");
 	
-	const digits = (day + month + year).split("").filter(d => d !== "0");
   const count = {};
   digits.forEach(d => count[d] = (count[d] || 0) + 1);
 
