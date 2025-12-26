@@ -951,7 +951,7 @@ window.generateResults = async function () {
   const numbersHtml = `<div><strong>Các con số:</strong> ${digits.join(", ")}</div>`;
 
   // Tạo bảng 3x3
-  const tableHtml = createTable3x3(count);
+  const tableHtml3x3 = createTable3x3(count);
 
   // Hiển thị mũi tên
   const arrowsHtml = renderArrows(count);
@@ -1112,7 +1112,7 @@ tableHtml += '</table>';
 // 3️⃣ Render
 
  const resultBox = document.getElementById("resultBox");
-  resultBox.innerHTML = numbersHtml + tableHtml + arrowsHtml;
+  resultBox.innerHTML = numbersHtml + tableHtml3x3 + arrowsHtml+ tableHtml;
   resultBox.style.display = "block";
 
 
