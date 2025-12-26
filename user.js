@@ -1139,37 +1139,67 @@ function renderBirthChart(day, month, year) {
       </div>`;
   });
 
-  html += `</div>`;
+ // ===== MŨI TÊN (TABLE) =====
+html += `
+  <h3 style="text-align:center">🎯 Mũi tên Thần số học</h3>
+  <table style="width:100%;border-collapse:collapse;margin-top:10px;">
+    <thead>
+      <tr style="background:#f0f4ff;">
+        <th style="border:1px solid #ccc;padding:8px;">Loại</th>
+        <th style="border:1px solid #ccc;padding:8px;">Tên mũi tên</th>
+        <th style="border:1px solid #ccc;padding:8px;">Bộ số</th>
+      </tr>
+    </thead>
+    <tbody>
+`;
 
-  // ===== MŨI TÊN =====
-  const arrows = {
-    "1-4-7": "Mũi tên Thực tế",
-    "2-5-8": "Mũi tên Cảm xúc",
-    "3-6-9": "Mũi tên Trí tuệ",
-    "1-2-3": "Mũi tên Kế hoạch",
-    "4-5-6": "Mũi tên Ý chí",
-    "7-8-9": "Mũi tên Hoạt động",
-    "1-5-9": "Mũi tên Quyết tâm",
-    "3-5-7": "Mũi tên Tâm linh"
-  };
+const arrowList = {
+  "1-4-7": "Mũi tên Thực tế",
+  "2-5-8": "Mũi tên Cảm xúc",
+  "3-6-9": "Mũi tên Trí tuệ",
+  "1-2-3": "Mũi tên Kế hoạch",
+  "4-5-6": "Mũi tên Ý chí",
+  "7-8-9": "Mũi tên Hoạt động",
+  "1-5-9": "Mũi tên Quyết tâm",
+  "3-5-7": "Mũi tên Tâm linh"
+};
 
-  let found = [];
-  let missing = [];
+let hasArrow = false;
 
-  for (const key in arrows) {
-    const nums = key.split("-");
-    if (nums.every(n => count[n])) {
-      found.push(arrows[key] + ` (${key})`);
-    } else if (nums.every(n => !count[n])) {
-      missing.push(arrows[key] + ` (${key})`);
-    }
+for (const key in arrowList) {
+  const nums = key.split("-");
+  const hasAll = nums.every(n => count[n]);
+  const hasNone = nums.every(n => !count[n]);
+
+  if (hasAll || hasNone) {
+    hasArrow = true;
+    html += `
+      <tr>
+        <td style="border:1px solid #ccc;padding:8px;text-align:center;">
+          ${hasAll ? "✔ Có" : "⚠ Trống"}
+        </td>
+        <td style="border:1px solid #ccc;padding:8px;">
+          ${arrowList[key]}
+        </td>
+        <td style="border:1px solid #ccc;padding:8px;text-align:center;">
+          ${key}
+        </td>
+      </tr>
+    `;
   }
+}
 
-  html += `<div class="arrow-title">🎯 Mũi tên có</div>`;
-  html += found.length ? `<ul>${found.map(a=>`<li>${a}</li>`).join("")}</ul>` : "Không có";
+if (!hasArrow) {
+  html += `
+    <tr>
+      <td colspan="3" style="text-align:center;padding:10px;">
+        Không có mũi tên nào
+      </td>
+    </tr>
+  `;
+}
 
-  html += `<div class="arrow-title">⚠️ Mũi tên trống</div>`;
-  html += missing.length ? `<ul>${missing.map(a=>`<li>${a}</li>`).join("")}</ul>` : "Không có";
+html += `</tbody></table>`;
 
   return html;
 }
