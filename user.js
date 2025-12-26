@@ -942,6 +942,19 @@ window.generateResults = async function () {
     const day = parseInt(document.getElementById("day").value);
     const month = parseInt(document.getElementById("month").value);
     const year = parseInt(document.getElementById("year").value);
+	
+	const digits = (day + month + year).split("").filter(d => d !== "0");
+  const count = {};
+  digits.forEach(d => count[d] = (count[d] || 0) + 1);
+
+  // Hiển thị danh sách số
+  const numbersHtml = `<div><strong>Các con số:</strong> ${digits.join(", ")}</div>`;
+
+  // Tạo bảng 3x3
+  const tableHtml = createTable3x3(count);
+
+  // Hiển thị mũi tên
+  const arrowsHtml = renderArrows(count);
 
     if (!name || !day || !month || !year) {
         alert("Bạn phải nhập đầy đủ thông tin!");
@@ -1097,10 +1110,10 @@ for (let i = 0; i < dataRows.length; i += 3) {
 tableHtml += '</table>';
 
 // 3️⃣ Render
-const resultBox = document.getElementById("resultBox");
-resultBox.style.display = "block";
-resultBox.innerHTML = tableHtml;
 
+ const resultBox = document.getElementById("resultBox");
+  resultBox.innerHTML = numbersHtml + tableHtml + arrowsHtml;
+  resultBox.style.display = "block";
 
 
 };
@@ -1115,29 +1128,28 @@ window.toggleMeaning = function (id) {
   el.style.display = el.style.display === "none" ? "block" : "none";
   window.currentMeaningOpen = el.style.display === "block" ? el : null;
 };
-function renderBirthChart(day, month, year) {
-  const digits = `${day}${month}${year}`
-    .split("")
-    .filter(d => d !== "0");
+// user.js
+// user.js
 
-  const count = {};
-  digits.forEach(d => count[d] = (count[d] || 0) + 1);
-
+// Hàm tạo bảng 3x3 từ count
+function createTable3x3(count) {
   const order = [3,6,9, 2,5,8, 1,4,7];
+  const positions = [[0,1,2],[3,4,5],[6,7,8]];
+  let tableHtml = "<h3>🧩 Bảng 3x3 số ngày sinh</h3><table>";
+  for(let r=0; r<3; r++){
+    tableHtml += "<tr>";
+    for(let c=0; c<3; c++){
+      const num = order[positions[r][c]];
+      tableHtml += `<td>${count[num] ? String(num).repeat(count[num]) : ""}</td>`;
+    }
+    tableHtml += "</tr>";
+  }
+  tableHtml += "</table>";
+  return tableHtml;
+}
 
-  let html = `<h3 style="text-align:center">🧩 Bản đồ ngày sinh</h3>`;
-  html += `<div class="birth-chart">`;
-
-  order.forEach(num => {
-    html += `
-      <div class="birth-cell">
-        ${count[num] ? String(num).repeat(count[num]) : ""}
-      </div>`;
-  });
-
-  html += `</div>`;
-
-  // ===== MŨI TÊN =====
+// Hàm render mũi tên
+function renderArrows(count) {
   const arrows = {
     "1-4-7": "Mũi tên Thực tế",
     "2-5-8": "Mũi tên Cảm xúc",
@@ -1149,26 +1161,44 @@ function renderBirthChart(day, month, year) {
     "3-5-7": "Mũi tên Tâm linh"
   };
 
-  let found = [];
-  let missing = [];
-
-  for (const key in arrows) {
+  let found = [], missing = [];
+  for(const key in arrows){
     const nums = key.split("-");
-    if (nums.every(n => count[n])) {
-      found.push(arrows[key] + ` (${key})`);
-    } else if (nums.every(n => !count[n])) {
-      missing.push(arrows[key] + ` (${key})`);
-    }
+    if(nums.every(n=>count[n])) found.push(`${arrows[key]} (${key})`);
+    else if(nums.every(n=>!count[n])) missing.push(`${arrows[key]} (${key})`);
   }
 
-  html += `<div class="arrow-title">🎯 Mũi tên có</div>`;
+  let html = `<div class="arrow-title">🎯 Mũi tên có</div>`;
   html += found.length ? `<ul>${found.map(a=>`<li>${a}</li>`).join("")}</ul>` : "Không có";
-
   html += `<div class="arrow-title">⚠️ Mũi tên trống</div>`;
   html += missing.length ? `<ul>${missing.map(a=>`<li>${a}</li>`).join("")}</ul>` : "Không có";
 
   return html;
 }
+
+// Hàm kết hợp hiển thị số, bảng và mũi tên
+export function generateResults() {
+  const day = document.getElementById("day").value.padStart(2,'0');
+  const month = document.getElementById("month").value.padStart(2,'0');
+  const year = document.getElementById("year").value;
+
+  const digits = (day + month + year).split("").filter(d => d !== "0");
+  const count = {};
+  digits.forEach(d => count[d] = (count[d] || 0) + 1);
+
+  // Hiển thị danh sách số
+  const numbersHtml = `<div><strong>Các con số:</strong> ${digits.join(", ")}</div>`;
+
+  // Tạo bảng 3x3
+  const tableHtml = createTable3x3(count);
+
+  // Hiển thị mũi tên
+  const arrowsHtml = renderArrows(count);
+
+  // Gán vào resultBox
+ 
+}
+
 
 
 });
