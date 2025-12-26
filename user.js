@@ -1139,17 +1139,19 @@ window.toggleMeaning = function (id) {
 // Hàm tạo bảng 3x3 từ count
 function createTable3x3(count) {
   const order = [3,6,9, 2,5,8, 1,4,7];
-  let html = `<h3 style="text-align:center">🧩 Bảng 3x3 số ngày sinh</h3>`;
-  html += `<div class="birth-chart">`;
-
-  order.forEach(num => {
-    html += `<div class="birth-cell">${count[num] ? String(num).repeat(count[num]) : ""}</div>`;
-  });
-
-  html += `</div>`;
-  return html;
+  const positions = [[0,1,2],[3,4,5],[6,7,8]];
+  let tableHtml = "<h3>🧩 Bảng số ngày sinh</h3><table>";
+  for(let r=0; r<3; r++){
+    tableHtml += "<tr>";
+    for(let c=0; c<3; c++){
+      const num = order[positions[r][c]];
+      tableHtml += `<td>${count[num] ? String(num).repeat(count[num]) : ""}</td>`;
+    }
+    tableHtml += "</tr>";
+  }
+  tableHtml += "</table>";
+  return tableHtml;
 }
-
 
 
 
