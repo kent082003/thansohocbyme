@@ -1115,7 +1115,7 @@ tableHtml += '</table>';
 // 3️⃣ Render
 
  const resultBox = document.getElementById("resultBox");
-  resultBox.innerHTML = tableHtml +numbersHtml + tableHtml3x3 + arrowsHtml ;
+  resultBox.innerHTML = tableHtml  + tableHtml3x3 + arrowsHtml ;
   resultBox.style.display = "block";
 
 
@@ -1139,19 +1139,19 @@ window.toggleMeaning = function (id) {
 // Hàm tạo bảng 3x3 từ count
 function createTable3x3(count) {
   const order = [3,6,9, 2,5,8, 1,4,7];
-  const positions = [[0,1,2],[3,4,5],[6,7,8]];
-  let tableHtml = "<h3>🧩 Bảng 3x3 số ngày sinh</h3><table>";
-  for(let r=0; r<3; r++){
-    tableHtml += "<tr>";
-    for(let c=0; c<3; c++){
-      const num = order[positions[r][c]];
-      tableHtml += `<td>${count[num] ? String(num).repeat(count[num]) : ""}</td>`;
-    }
-    tableHtml += "</tr>";
-  }
-  tableHtml += "</table>";
-  return tableHtml;
+  let html = `<h3 style="text-align:center">🧩 Bảng 3x3 số ngày sinh</h3>`;
+  html += `<div class="birth-chart">`;
+
+  order.forEach(num => {
+    html += `<div class="birth-cell">${count[num] ? String(num).repeat(count[num]) : ""}</div>`;
+  });
+
+  html += `</div>`;
+  return html;
 }
+
+
+
 
 // Hàm render mũi tên
 function renderArrows(count) {
@@ -1175,7 +1175,7 @@ function renderArrows(count) {
 
 
 
-let html = `<div class="arrow-title">🎯 Mũi tên có</div>`;
+let html = `<div class="arrow-title">🎯 Mũi tên có 3 so</div>`;
 html += found.length ? `<ul class="arrow-list">${found.map(a=>`<li class="present">${a}</li>`).join("")}</ul>` : "Không có";
 html += `<div class="arrow-title">⚠️ Mũi tên trống</div>`;
 html += missing.length ? `<ul class="arrow-list">${missing.map(a=>`<li class="missing">${a}</li>`).join("")}</ul>` : "Không có";

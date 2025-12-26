@@ -119,3 +119,26 @@ tr:hover {
 
 .arrow-list li.present { color: green; font-weight: bold; }
 .arrow-list li.missing { color: #999; }
+
+
+.birth-chart {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.birth-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #d60000;
+  border: 2px solid #555;
+  border-radius: 10px;
+  background: #f9f9f9;
+  box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
+}
