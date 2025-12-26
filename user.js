@@ -1176,29 +1176,6 @@ function renderArrows(count) {
   return html;
 }
 
-// Hàm kết hợp hiển thị số, bảng và mũi tên
-export function generateResults() {
-  const day = document.getElementById("day").value.padStart(2,'0');
-  const month = document.getElementById("month").value.padStart(2,'0');
-  const year = document.getElementById("year").value;
-
-  const digits = (day + month + year).split("").filter(d => d !== "0");
-  const count = {};
-  digits.forEach(d => count[d] = (count[d] || 0) + 1);
-
-  // Hiển thị danh sách số
-  const numbersHtml = `<div><strong>Các con số:</strong> ${digits.join(", ")}</div>`;
-
-  // Tạo bảng 3x3
-  const tableHtml = createTable3x3(count);
-
-  // Hiển thị mũi tên
-  const arrowsHtml = renderArrows(count);
-
-  // Gán vào resultBox
- 
-}
-
 
 
 });
