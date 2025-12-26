@@ -105,3 +105,17 @@ tr:hover {
     }
 	
 	
+	
+	.arrow-title {
+  font-weight: bold;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.arrow-list li {
+  margin-left: 15px;
+  line-height: 1.4;
+}
+
+.arrow-list li.present { color: green; font-weight: bold; }
+.arrow-list li.missing { color: #999; }

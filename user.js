@@ -956,6 +956,8 @@ window.generateResults = async function () {
 
   // Hiển thị mũi tên
   const arrowsHtml = renderArrows(count);
+  
+  
 
     if (!name || !day || !month || !year) {
         alert("Bạn phải nhập đầy đủ thông tin!");
@@ -1113,8 +1115,10 @@ tableHtml += '</table>';
 // 3️⃣ Render
 
  const resultBox = document.getElementById("resultBox");
-  resultBox.innerHTML = numbersHtml + tableHtml3x3 + arrowsHtml+ tableHtml;
+  resultBox.innerHTML = tableHtml +numbersHtml + tableHtml3x3 + arrowsHtml ;
   resultBox.style.display = "block";
+
+
 
 
 };
@@ -1169,10 +1173,12 @@ function renderArrows(count) {
     else if(nums.every(n=>!count[n])) missing.push(`${arrows[key]} (${key})`);
   }
 
-  let html = `<div class="arrow-title">🎯 Mũi tên có</div>`;
-  html += found.length ? `<ul>${found.map(a=>`<li>${a}</li>`).join("")}</ul>` : "Không có";
-  html += `<div class="arrow-title">⚠️ Mũi tên trống</div>`;
-  html += missing.length ? `<ul>${missing.map(a=>`<li>${a}</li>`).join("")}</ul>` : "Không có";
+
+
+let html = `<div class="arrow-title">🎯 Mũi tên có</div>`;
+html += found.length ? `<ul class="arrow-list">${found.map(a=>`<li class="present">${a}</li>`).join("")}</ul>` : "Không có";
+html += `<div class="arrow-title">⚠️ Mũi tên trống</div>`;
+html += missing.length ? `<ul class="arrow-list">${missing.map(a=>`<li class="missing">${a}</li>`).join("")}</ul>` : "Không có";
 
   return html;
 }
