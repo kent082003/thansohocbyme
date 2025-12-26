@@ -1096,10 +1096,16 @@ for (let i = 0; i < dataRows.length; i += 3) {
 
 tableHtml += '</table>';
 
+
+
+
 // 3️⃣ Render
 const resultBox = document.getElementById("resultBox");
 resultBox.style.display = "block";
-resultBox.innerHTML = tableHtml;
+
+const birthChartHTML = renderBirthChart(day, month, year);
+resultBox.innerHTML = birthChartHTML + tableHtml;
+
 
 };
 window.toggleMeaning = function (id) {
@@ -1113,6 +1119,60 @@ window.toggleMeaning = function (id) {
   el.style.display = el.style.display === "none" ? "block" : "none";
   window.currentMeaningOpen = el.style.display === "block" ? el : null;
 };
+function renderBirthChart(day, month, year) {
+  const digits = `${day}${month}${year}`
+    .split("")
+    .filter(d => d !== "0");
+
+  const count = {};
+  digits.forEach(d => count[d] = (count[d] || 0) + 1);
+
+  const order = [3,6,9, 2,5,8, 1,4,7];
+
+  let html = `<h3 style="text-align:center">🧩 Bản đồ ngày sinh</h3>`;
+  html += `<div class="birth-chart">`;
+
+  order.forEach(num => {
+    html += `
+      <div class="birth-cell">
+        ${count[num] ? String(num).repeat(count[num]) : ""}
+      </div>`;
+  });
+
+  html += `</div>`;
+
+  // ===== MŨI TÊN =====
+  const arrows = {
+    "1-4-7": "Mũi tên Thực tế",
+    "2-5-8": "Mũi tên Cảm xúc",
+    "3-6-9": "Mũi tên Trí tuệ",
+    "1-2-3": "Mũi tên Kế hoạch",
+    "4-5-6": "Mũi tên Ý chí",
+    "7-8-9": "Mũi tên Hoạt động",
+    "1-5-9": "Mũi tên Quyết tâm",
+    "3-5-7": "Mũi tên Tâm linh"
+  };
+
+  let found = [];
+  let missing = [];
+
+  for (const key in arrows) {
+    const nums = key.split("-");
+    if (nums.every(n => count[n])) {
+      found.push(arrows[key] + ` (${key})`);
+    } else if (nums.every(n => !count[n])) {
+      missing.push(arrows[key] + ` (${key})`);
+    }
+  }
+
+  html += `<div class="arrow-title">🎯 Mũi tên có</div>`;
+  html += found.length ? `<ul>${found.map(a=>`<li>${a}</li>`).join("")}</ul>` : "Không có";
+
+  html += `<div class="arrow-title">⚠️ Mũi tên trống</div>`;
+  html += missing.length ? `<ul>${missing.map(a=>`<li>${a}</li>`).join("")}</ul>` : "Không có";
+
+  return html;
+}
 
 
 });
