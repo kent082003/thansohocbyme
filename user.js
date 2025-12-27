@@ -1030,14 +1030,14 @@ window.generateResults = async function () {
         intellectual: await loadMeaning("tu_duy_ly_tri", intellectual),
         subconscious: await loadMeaning("suc_manh_tiem_thuc", subconscious),
         soulPersonalityConnection: await loadMeaning("ket_noi_linhhon_nhancach", soulPersonalityConnection)
-		arrow_147: await loadMeaning("mui_ten", "147"),
-arrow_258: await loadMeaning("mui_ten", "258"),
-arrow_369: await loadMeaning("mui_ten", "369"),
-arrow_123: await loadMeaning("mui_ten", "123"),
-arrow_456: await loadMeaning("mui_ten", "456"),
-arrow_789: await loadMeaning("mui_ten", "789"),
-arrow_159: await loadMeaning("mui_ten", "159"),
-arrow_357: await loadMeaning("mui_ten", "357"),
+		147: await loadMeaning("mui_ten", "147"),
+	258: await loadMeaning("mui_ten", "258"),
+	369: await loadMeaning("mui_ten", "369"),
+	123: await loadMeaning("mui_ten", "123"),
+	456: await loadMeaning("mui_ten", "456"),
+	789: await loadMeaning("mui_ten", "789"),
+	159: await loadMeaning("mui_ten", "159"),
+	357: await loadMeaning("mui_ten", "357"),
 
 
 	
