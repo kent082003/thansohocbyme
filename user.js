@@ -955,8 +955,8 @@ window.generateResults = async function () {
   const tableHtml3x3 = createTable3x3(count);
 
   // Hiển thị mũi tên
-  const arrowsHtml = renderArrows(count);
   
+  const arrowsHtml = await renderArrows(count);
   
 
     if (!name || !day || !month || !year) {
@@ -1154,36 +1154,57 @@ function createTable3x3(count) {
 }
 
 
-
-// Hàm render mũi tên
-function renderArrows(count) {
+async function renderArrows(count) {
   const arrows = {
-    "1-4-7": "Mũi tên Thực tế",
-    "2-5-8": "Mũi tên Cảm xúc",
-    "3-6-9": "Mũi tên Trí tuệ",
-    "1-2-3": "Mũi tên Kế hoạch",
-    "4-5-6": "Mũi tên Ý chí",
-    "7-8-9": "Mũi tên Hoạt động",
-    "1-5-9": "Mũi tên Quyết tâm",
-    "3-5-7": "Mũi tên Tâm linh"
+    "147": "Mũi tên Thực tế",
+    "258": "Mũi tên Cảm xúc",
+    "369": "Mũi tên Trí tuệ",
+    "123": "Mũi tên Kế hoạch",
+    "456": "Mũi tên Ý chí",
+    "789": "Mũi tên Hoạt động",
+    "159": "Mũi tên Quyết tâm",
+    "357": "Mũi tên Tâm linh"
   };
 
   let found = [], missing = [];
-  for(const key in arrows){
-    const nums = key.split("-");
-    if(nums.every(n=>count[n])) found.push(`${arrows[key]} (${key})`);
-    else if(nums.every(n=>!count[n])) missing.push(`${arrows[key]} (${key})`);
+  for (const key in arrows) {
+    const nums = key.split(""); // "147" => ["1","4","7"]
+    if (nums.every(n => count[n])) found.push(key);
+    else if (nums.every(n => !count[n])) missing.push(key);
   }
 
+  // --- Load ý nghĩa từ Firebase ---
+  async function loadArrowMeaning(type, key) {
+    return await loadMeaning(type, key); // dùng hàm bạn đã có
+  }
 
+  let html = `<div class="arrow-title">🎯 Mũi tên có 3 số</div>`;
+  if (found.length) {
+    html += '<ul class="arrow-list">';
+    for (let k of found) {
+      const meaning = await loadArrowMeaning("mui_ten", k); // lưu mũi tên ở collection 'mui_ten'
+      html += `<li class="present"><strong>${arrows[k]}</strong> (${k})<br>${meaning ?? ''}</li>`;
+    }
+    html += '</ul>';
+  } else {
+    html += "Không có";
+  }
 
-let html = `<div class="arrow-title">🎯 Mũi tên có 3 so</div>`;
-html += found.length ? `<ul class="arrow-list">${found.map(a=>`<li class="present">${a}</li>`).join("")}</ul>` : "Không có";
-html += `<div class="arrow-title">⚠️ Mũi tên trống</div>`;
-html += missing.length ? `<ul class="arrow-list">${missing.map(a=>`<li class="missing">${a}</li>`).join("")}</ul>` : "Không có";
+  html += `<div class="arrow-title">⚠️ Mũi tên trống</div>`;
+  if (missing.length) {
+    html += '<ul class="arrow-list">';
+    for (let k of missing) {
+      const meaning = await loadArrowMeaning("mui_ten", k);
+      html += `<li class="missing"><strong>${arrows[k]}</strong> (${k})<br>${meaning ?? ''}</li>`;
+    }
+    html += '</ul>';
+  } else {
+    html += "Không có";
+  }
 
   return html;
 }
+
 
 
 
